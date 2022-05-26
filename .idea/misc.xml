@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOPProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.188" />
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOPProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.188" />
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOPProject/app/src/main/res/layout/activity_admin_add_new_product.xml" value="0.275" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOPProject/app/src/main/res/layout/activity_main.xml" value="0.275" />
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOPProject/app/src/main/res/layout/activity_product_details.xml" value="0.275" />
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOPProject/app/src/main/res/layout/activity_register.xml" value="0.275" />
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOPProject/app/src/main/res/layout/activity_search_products.xml" value="0.275" />
       </map>
     </option>
   </component>
