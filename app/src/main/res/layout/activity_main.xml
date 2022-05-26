@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/welcome"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <ImageView
@@ -42,7 +42,7 @@
         android:background="@drawable/buttons"
         android:padding="15dp"
         android:textAllCaps="false"
-        android:textSize="13sp"
+        android:textSize="18dp"
         android:text="Already have an Account? Login"
         android:textColor="@android:color/white"
         />
@@ -52,15 +52,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/main_login_btn"
-        android:layout_marginBottom="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/input_design"
         android:padding="10dp"
-        android:textAllCaps="false"
-        android:textSize="18sp"
         android:text="Join Now"
-        android:textColor="@android:color/white"
-        />
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
 
 </RelativeLayout>
