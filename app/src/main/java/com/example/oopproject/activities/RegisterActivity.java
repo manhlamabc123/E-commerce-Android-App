@@ -1,8 +1,10 @@
-package com.example.oopproject;
+package com.example.oopproject.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.oopproject.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
