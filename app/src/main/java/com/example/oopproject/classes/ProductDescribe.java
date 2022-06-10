@@ -1,6 +1,6 @@
 package com.example.oopproject.classes;
 
-public class OS extends ProductDescribe {
+public abstract class ProductDescribe {
     private String id;
     private String name;
 }
