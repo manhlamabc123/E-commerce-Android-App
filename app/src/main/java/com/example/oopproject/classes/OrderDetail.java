@@ -4,5 +4,5 @@ public class OrderDetail {
     private String id;
     private String GD_id;
     private String PC_id;
-    private double quantity;
+    private int quantity;
 }
