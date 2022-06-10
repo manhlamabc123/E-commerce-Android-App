@@ -1,10 +1,8 @@
-package com.example.oopproject.activities;
+package com.example.oopproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import com.example.oopproject.R;
 
 public class LoginActivity extends AppCompatActivity {
 

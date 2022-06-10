@@ -10,18 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OOPProject" >
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.OOPProject.NoActionBar" />
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
