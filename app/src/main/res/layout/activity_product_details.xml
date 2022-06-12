@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductDetailsActivity">
+    tools:context=".ProductDetailsActivity"
+    android:background="@drawable/background">
 
     <ImageView
         android:id="@+id/product_image_details"
