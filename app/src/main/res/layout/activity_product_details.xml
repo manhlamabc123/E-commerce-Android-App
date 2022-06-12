@@ -157,7 +157,6 @@
             android:id="@+id/imageMinus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:="@id/textCounter"
             app:srcCompat="@drawable/ic_minus" />
 
         <TextView
