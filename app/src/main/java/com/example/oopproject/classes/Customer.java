@@ -6,4 +6,9 @@ public class Customer extends Person{
     private Date dateOfBirth;
     private String gender;
     private String DC_id;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
 }
