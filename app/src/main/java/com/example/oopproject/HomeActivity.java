@@ -83,8 +83,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
