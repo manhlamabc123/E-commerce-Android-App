@@ -100,5 +100,11 @@
         android:layout_below="@+id/settings_gender"
         android:hint="Birthday ..."
         android:layout_margin="15dp"/>
+    <Spinner
+        android:id="@+id/gender_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_birthday"
+        />
 
 </RelativeLayout>
