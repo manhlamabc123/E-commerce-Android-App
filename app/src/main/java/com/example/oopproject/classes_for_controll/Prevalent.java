@@ -1,4 +1,4 @@
-package com.example.oopproject.classes;
+package com.example.oopproject.classes_for_controll;
 
 import com.example.oopproject.classes.Customer;
 

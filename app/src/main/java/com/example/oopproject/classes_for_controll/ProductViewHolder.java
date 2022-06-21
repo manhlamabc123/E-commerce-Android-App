@@ -1,4 +1,4 @@
-package com.example.oopproject.classes;
+package com.example.oopproject.classes_for_controll;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +11,7 @@ import com.example.oopproject.interfaces.ItemClickListener;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView textProductName, textProductDescription;
+    public TextView textProductName, textProductDescription, textProductPrice;
     public ImageView imageView;
     public ItemClickListener listener;
 
@@ -21,7 +21,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
 //        imageView = (ImageView) itemView.findViewById(R.id.product_image);
         textProductName = (TextView) itemView.findViewById(R.id.product_name);
         textProductDescription = (TextView) itemView.findViewById(R.id.product_description);
-
+        textProductPrice = (TextView) itemView.findViewById(R.id.product_price);
     }
 
     public void setItemClickListener(ItemClickListener listener){

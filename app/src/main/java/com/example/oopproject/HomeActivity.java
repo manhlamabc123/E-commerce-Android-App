@@ -2,15 +2,24 @@ package com.example.oopproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.oopproject.classes_for_controll.ProductViewHolder;
+import com.example.oopproject.classes.Product;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -25,11 +34,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    private DatabaseReference productReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        productReference = FirebaseDatabase.getInstance().getReference().child("Product");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
@@ -65,6 +77,37 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseRecyclerOptions<Product> options =
+                new FirebaseRecyclerOptions.Builder<Product>()
+                        .setQuery(productReference, Product.class)
+                        .build();
+
+        FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
+                        holder.textProductName.setText(model.getName());
+                        holder.textProductDescription.setText(model.getDescription());
+                        holder.textProductPrice.setText("Price: " + model.getPrice() + "$");
+//                        Picasso.get().load(model.getImage()).into(holder.imageView);
+                    }
+
+                    @NonNull
+                    @Override
+                    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.products_items_layout, parent, false);
+                        ProductViewHolder holder = new ProductViewHolder(view);
+                        return holder;
+                    }
+                };
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
     }
 
     @Override
