@@ -45,18 +45,48 @@ public class SettingsActivity extends AppCompatActivity {
 
 //        storageProfilePictureRef = FirebaseStorage.getInstance().getReference()
 
+        //-------------------------Connect to UI-------------------------
         profileImageView = (CircleImageView) findViewById(R.id.settings_profile_image);
         fullNameEditText = (EditText) findViewById(R.id.settings_name);
         userPhoneEditText = (EditText) findViewById(R.id.settings_phone_number);
-
+        dateButton = findViewById(R.id.datePickerButton);
+        closeTextBtn = (TextView) findViewById(R.id.close_settings_btn);
+        saveTextButton = (TextView) findViewById(R.id.update_account_settings_btn);
+        //Gender Picker
         Spinner spinner = (Spinner) findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
+        //-----------------------------------------------------------------
+        //-------------------------Initialize Date-------------------------
         initDatePicker();
-        dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(dateController.getTodayDate());
+        //-----------------------------------------------------------------
+        //-------------------------Close Button-------------------------
+        closeTextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                finish();
+            }
+        });
+        //-----------------------------------------------------------------
+        //-------------------------Save Button-------------------------
+        saveTextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                if (checker.equals("clicked"))
+                {
+//                    userInfoSaved();
+                }
+                else
+                {
+//                    updateOnlyUserInfo();
+                }
+            }
+        });
+        //-----------------------------------------------------------------
     }
 
     private void initDatePicker()
