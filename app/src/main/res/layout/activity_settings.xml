@@ -85,26 +85,24 @@
         android:hint="Phone Number ..."
         android:layout_margin="15dp"/>
 
-    <EditText
-        android:id="@+id/settings_gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_phone_number"
-        android:hint="Gender ..."
-        android:layout_margin="15dp"/>
-
-    <EditText
-        android:id="@+id/settings_birthday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_gender"
-        android:hint="Birthday ..."
-        android:layout_margin="15dp"/>
     <Spinner
         android:id="@+id/gender_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_birthday"
+        android:layout_below="@+id/settings_phone_number"
+        android:layout_margin="15dp"
         />
+
+    <Button
+        android:id="@+id/datePickerButton"
+        android:layout_below="@+id/gender_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JAN 01 2020"
+        android:textSize="17sp"
+        android:textColor="@android:color/black"
+        style="?android:spinnerStyle"
+        android:layout_margin="15dp"
+        android:onClick="openDatePicker"/>
 
 </RelativeLayout>
