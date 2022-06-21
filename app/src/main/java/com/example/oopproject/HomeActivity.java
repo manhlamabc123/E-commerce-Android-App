@@ -36,17 +36,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference productReference;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //-------------------------Get product's data from server-------------------------
         productReference = FirebaseDatabase.getInstance().getReference().child("Product");
-
+        //-----------------------------------------------------------------
+        //-------------------------Toolbar Setup-------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
-
+        //-----------------------------------------------------------------
+        //-------------------------Floating Button-------------------------
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,32 +57,34 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         .setAction("Action", null).show();
             }
         });
-
+        //-----------------------------------------------------------------
+        //-------------------------Drawer Layout-------------------------
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
+        //-----------------------------------------------------------------
+        //-------------------------Navigation View-------------------------
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        //-----------------------------------------------------------------
+        //-------------------------User Setting-------------------------
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
-
         userNameTextView.setText("User");
 //        userNameTextView.setText(Prevalent.currentOnlineUser.getName());
 //        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
-
-
+        //-----------------------------------------------------------------
+        //-------------------------Show Products on screen-------------------------
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        //-----------------------------------------------------------------
     }
 
-    @Override
-    protected void onStart() {
+    @Override protected void onStart() {
         super.onStart();
 
         FirebaseRecyclerOptions<Product> options =
@@ -110,8 +114,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         adapter.startListening();
     }
 
-    @Override
-    public void onBackPressed() {
+    @Override public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -120,23 +123,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item)
-    {
+    @Override public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_cart:
