@@ -9,15 +9,19 @@ import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.oopproject.classes_for_controll.ProductViewHolder;
 import com.example.oopproject.classes.Product;
+import com.example.oopproject.classes.ProductColor;
+import com.example.oopproject.classes_for_controll.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -34,14 +38,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    private DatabaseReference productReference;
+    private DatabaseReference productColorReference;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         //-------------------------Get product's data from server-------------------------
-        productReference = FirebaseDatabase.getInstance().getReference().child("Product");
+        productColorReference = FirebaseDatabase.getInstance().getReference().child("Product Color");
         //-----------------------------------------------------------------
         //-------------------------Toolbar Setup-------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -87,18 +91,33 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions<Product> options =
-                new FirebaseRecyclerOptions.Builder<Product>()
-                        .setQuery(productReference, Product.class)
+        FirebaseRecyclerOptions<ProductColor> options =
+                new FirebaseRecyclerOptions.Builder<ProductColor>()
+                        .setQuery(productColorReference, ProductColor.class)
                         .build();
 
-        FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter =
-                new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
+        FirebaseRecyclerAdapter<ProductColor, ProductViewHolder> adapter =
+                new FirebaseRecyclerAdapter<ProductColor, ProductViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
-                        holder.textProductName.setText(model.getName());
-                        holder.textProductDescription.setText(model.getDescription());
-                        holder.textProductPrice.setText("Price: " + model.getPrice() + "$");
+                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull ProductColor model) {
+
+                        DatabaseReference productReference = FirebaseDatabase.getInstance().getReference().child("Product");
+                        productReference.child(model.getPhone_id()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    Product product = snapshot.getValue(Product.class);
+                                    holder.textProductName.setText(product.getName());
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        holder.textProductPrice.setText("Price: " + model.getPriceBuy() + "$");
 //                        Picasso.get().load(model.getImage()).into(holder.imageView);
                     }
 
