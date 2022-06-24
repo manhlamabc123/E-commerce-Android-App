@@ -110,8 +110,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                                intent.putExtra("productID", model.getPhone_id());
-                                intent.putExtra("colorID", model.getColor_id());
+                                intent.putExtra("productName", model.getProductName());
                                 startActivity(intent);
                             }
                         });

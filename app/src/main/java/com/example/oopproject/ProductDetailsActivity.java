@@ -45,10 +45,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+//                        ------------------------------Data from Home Activity------------------------------
+        productID = getIntent().getStringExtra("productName");
+//                        ------------------------------------------------------------------------------------------
 //                        ------------------------------Connect to UI------------------------------
-        productID = getIntent().getStringExtra("productID");
-        colorID = getIntent().getStringExtra("colorID");
-
         minusButton = (ImageView) findViewById(R.id.image_minus);
         plusButton = (ImageView) findViewById(R.id.image_plus);
         textCounter = (TextView) findViewById(R.id.text_counter);
@@ -88,6 +88,31 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+            }
+        });
+//                        ------------------------------------------------------------------------------------------
+//                        ------------------------------Connect to UI------------------------------
+        DatabaseReference productReference = FirebaseDatabase.getInstance().getReference().child("Product").child(productID);
+        productReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Product product = snapshot.getValue(Product.class);
+                    productName.setText(product.getProductName());
+                    productWarranty.setText(String.valueOf(product.getWarranty()));
+                    productCategory.setText(product.getCategory());
+                    productDescription.setText(product.getDescription());
+                    productInclude.setText(product.getInclude());
+                    productManufacturer.setText(product.getManufacturer());
+                    productOS.setText(product.getOs());
+                    productRAM.setText(String.valueOf(product.getProductName()));
+                    productScreen.setText(String.valueOf(product.getScreen()));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });

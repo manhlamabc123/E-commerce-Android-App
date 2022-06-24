@@ -1,53 +1,36 @@
 package com.example.oopproject.classes;
 
+import java.util.ArrayList;
+
 public class Product {
-    private String id;
-    private String name;
+    private String productName;
     private String category;
-    private double priceImport;
     private String manufacturer;
-    private String os;
     private String include;
-    private double ram;
-    private double memory;
+    private String os;
     private double screen;
     private String description;
     private double warranty;
+    private ArrayList<Details> details;
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public double getPriceImport() {
-        return priceImport;
-    }
-
     public String getManufacturer() {
         return manufacturer;
-    }
-
-    public String getOs() {
-        return os;
     }
 
     public String getInclude() {
         return include;
     }
 
-    public double getRam() {
-        return ram;
-    }
-
-    public double getMemory() {
-        return memory;
+    public String getOs() {
+        return os;
     }
 
     public double getScreen() {
@@ -62,7 +45,7 @@ public class Product {
         return warranty;
     }
 
-    public double getPrice() {
-        return 0;
+    public ArrayList<Details> getDetails() {
+        return details;
     }
 }
