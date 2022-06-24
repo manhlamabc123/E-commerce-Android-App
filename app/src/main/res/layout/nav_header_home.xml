@@ -30,7 +30,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:text="user name"
-        android:gravity="center"
+
         android:layout_marginLeft="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

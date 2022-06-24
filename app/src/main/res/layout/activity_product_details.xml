@@ -23,115 +23,19 @@
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/product_category_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_name_details"
-        android:text="Product Category"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/product_description_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_category_details"
-        android:text="Product Description"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/product_include_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_description_details"
-        android:text="Product Include"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/product_manufacturer_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_include_details"
-        android:text="Product Manufacturer"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/product_memory_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_manufacturer_details"
-        android:text="Product Memory"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/product_os_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_memory_details"
-        android:text="Product OS"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/product_ram_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_os_details"
-        android:text="Product RAM"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/product_screen_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_ram_details"
-        android:text="Product Screen"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:gravity="center"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/product_warranty_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_screen_details"
+        android:layout_below="@id/product_name_details"
         android:text="Product Warranty"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:gravity="center"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"/>
 
     <TextView
@@ -143,10 +47,125 @@
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/product_detail_header_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textScaleX="150"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_below="@id/counter_btn"
         android:gravity="center"
         android:layout_marginTop="10dp"/>
 
+    <TextView
+        android:id="@+id/product_detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Product's details"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@id/product_detail_header_line"
+        android:gravity="center" />
+
+
+    <TextView
+        android:id="@+id/product_category_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_detail_header"
+        android:text="Product Category"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/product_description_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_category_details"
+        android:text="Product Description"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/product_include_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_description_details"
+        android:text="Product Include"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/product_manufacturer_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_include_details"
+        android:text="Product Manufacturer"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/product_memory_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_manufacturer_details"
+        android:text="Product Memory"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/product_os_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_memory_details"
+        android:text="Product OS"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/product_ram_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_os_details"
+        android:text="Product RAM"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/product_screen_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_ram_details"
+        android:text="Product Screen"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+
+
     <LinearLayout
+        android:id="@+id/counter_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/product_price_details"
