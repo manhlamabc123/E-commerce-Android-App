@@ -38,14 +38,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    private DatabaseReference productColorReference;
+    private DatabaseReference productReference;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         //-------------------------Get product's data from server-------------------------
-        productColorReference = FirebaseDatabase.getInstance().getReference().child("Product Color");
+        productReference = FirebaseDatabase.getInstance().getReference().child("Product");
         //-----------------------------------------------------------------
         //-------------------------Toolbar Setup-------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,34 +91,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions<ProductColor> options =
-                new FirebaseRecyclerOptions.Builder<ProductColor>()
-                        .setQuery(productColorReference, ProductColor.class)
+        FirebaseRecyclerOptions<Product> options =
+                new FirebaseRecyclerOptions.Builder<Product>()
+                        .setQuery(productReference.limitToFirst(10), Product.class)
                         .build();
 
-        FirebaseRecyclerAdapter<ProductColor, ProductViewHolder> adapter =
-                new FirebaseRecyclerAdapter<ProductColor, ProductViewHolder>(options) {
+        FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull ProductColor model) {
+                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
 
 //                        ------------------------------Retrieve Info from Database------------------------------
-                        DatabaseReference productReference = FirebaseDatabase.getInstance().getReference().child("Product");
-                        productReference.child(model.getPhone_id()).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (snapshot.exists()) {
-                                    Product product = snapshot.getValue(Product.class);
-                                    holder.textProductName.setText(product.getName());
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-
-                        holder.textProductPrice.setText("Price: " + model.getPriceBuy() + "$");
+                        holder.textProductName.setText(model.getProductName());
 //                        Picasso.get().load(model.getImage()).into(holder.imageView);
 //                        ------------------------------------------------------------------------------------------
 //                        ------------------------------to Product Details Activity------------------------------
