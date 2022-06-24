@@ -155,13 +155,13 @@
         android:layout_marginTop="10dp">
 
         <ImageView
-            android:id="@+id/imageMinus"
+            android:id="@+id/image_minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_minus" />
 
         <TextView
-            android:id="@+id/textCounter"
+            android:id="@+id/text_counter"
             android:layout_width="50dp"
             android:layout_height="53dp"
             android:text="1"
@@ -171,7 +171,7 @@
             android:background="@color/colorPrimary" />
 
         <ImageView
-            android:id="@+id/imagePlus"
+            android:id="@+id/image_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_plus" />

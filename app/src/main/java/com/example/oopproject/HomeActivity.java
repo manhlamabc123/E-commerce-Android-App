@@ -101,6 +101,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull ProductColor model) {
 
+//                        ------------------------------Retrieve Info from Database------------------------------
                         DatabaseReference productReference = FirebaseDatabase.getInstance().getReference().child("Product");
                         productReference.child(model.getPhone_id()).addValueEventListener(new ValueEventListener() {
                             @Override
@@ -119,7 +120,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                         holder.textProductPrice.setText("Price: " + model.getPriceBuy() + "$");
 //                        Picasso.get().load(model.getImage()).into(holder.imageView);
-
+//                        ------------------------------------------------------------------------------------------
+//                        ------------------------------to Product Details Activity------------------------------
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -129,6 +131,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 startActivity(intent);
                             }
                         });
+//                        ------------------------------------------------------------------------------------------
                     }
 
                     @NonNull
