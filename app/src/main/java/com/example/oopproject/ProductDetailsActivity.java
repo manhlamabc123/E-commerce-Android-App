@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.oopproject.classes.Product;
@@ -16,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
@@ -38,6 +43,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private TextView productOS;
     private TextView productRAM;
     private TextView productScreen;
+    private Spinner productColor;
 
     private Button addToCartButton;
 
@@ -64,6 +70,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productOS = (TextView) findViewById(R.id.product_os_details);
         productRAM = (TextView) findViewById(R.id.product_ram_details);
         productScreen = (TextView) findViewById(R.id.product_screen_details);
+        productColor = (Spinner) findViewById(R.id.product_color_picker);
 
         addToCartButton = (Button) findViewById(R.id.product_add_to_cart_btn);
 //                        ------------------------------------------------------------------------------------------
@@ -113,6 +120,25 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+//                        ------------------------------------------------------------------------------------------
+//                        ------------------------------Color Picker------------------------------
+        ArrayList<String> spinnerArray = new ArrayList<String>();
+        spinnerArray.add("Red");
+        spinnerArray.add("Blue");
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray); //selected item will look like a spinner set from XML
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        productColor.setAdapter(spinnerArrayAdapter);
+        productColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
