@@ -4,12 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.oopproject.classes.Customer;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 //import com.google.firebase.database.DataSnapshot;
 //import com.google.firebase.database.DatabaseError;
@@ -23,16 +31,16 @@ public class LoginActivity extends AppCompatActivity {
     private Button LoginButton;
     private ProgressDialog loadingBar;
 
-    private String parentDbName = "Users";
+    private String parentDbName = "Customer";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        LoginButton = (Button) findViewById(R.id.register_btn);
-        InputPassword = (EditText) findViewById(R.id.register_password_input);
-        InputNumber = (EditText) findViewById(R.id.register_phone_number_input);
+        LoginButton = (Button) findViewById(R.id.login_btn);
+        InputPassword = (EditText) findViewById(R.id.login_password_input);
+        InputNumber = (EditText) findViewById(R.id.login_phone_number_input);
         loadingBar = new ProgressDialog(this);
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
@@ -63,28 +71,42 @@ public class LoginActivity extends AppCompatActivity {
             loadingBar.show();
         }
 
-//        AllowAccessToAccount(phone, password);
+        AllowAccessToAccount(phone, password);
     }
 
-//    private void AllowAccessToAccount(String phone, String password) {
-//        final DatabaseReference RootRef;
-//        RootRef = FirebaseDatabase.getInstance().getReference();
-//
-//        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.child(parentDbName).child(phone).exists()) {
-//
-//                }
-//                else {
-//                    Toast.makeText(LoginActivity.this, "Account with this " + phone + " not exists.", Toast.LENGTH_SHORT).show();
-//                    loadingBar.dismiss();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        }
+    private void AllowAccessToAccount(String phone, String password) {
+        final DatabaseReference RootRef;
+        RootRef = FirebaseDatabase.getInstance().getReference();
+
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(parentDbName).child(phone).exists()) {
+                    Customer customerData = snapshot.child(parentDbName).child(phone).getValue(Customer.class);
+                    if (customerData.getPassword().equals(password)) {
+                        Toast.makeText(LoginActivity.this, "Logged in successfully...", Toast.LENGTH_SHORT).show();
+                        loadingBar.dismiss();
+
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        loadingBar.dismiss();
+                        Toast.makeText(LoginActivity.this, "Incorrect password!", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                else {
+                    loadingBar.dismiss();
+                    Toast.makeText(LoginActivity.this, "Invalid phone number. You may want to register!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
+}
