@@ -50,6 +50,33 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"/>
 
+    <LinearLayout
+        android:id="@+id/product_color_text_and_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/product_price_details">
+
+        <TextView
+            android:id="@+id/product_color_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Color: "
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"/>
+
+        <Spinner
+            android:id="@+id/product_color_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_alignBaseline="@id/product_color_details"
+            android:layout_toRightOf="@id/product_color_details"/>
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/product_detail_header_line"
         android:layout_width="match_parent"
@@ -168,7 +195,7 @@
         android:id="@+id/counter_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_price_details"
+        android:layout_below="@id/product_color_text_and_picker"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
