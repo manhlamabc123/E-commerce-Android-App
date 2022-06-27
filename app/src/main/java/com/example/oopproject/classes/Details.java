@@ -5,6 +5,7 @@ public class Details {
     private double memory;
     private double priceBuy;
     private double priceImport;
+    private String color;
 
     public double getRam() {
         return ram;
@@ -20,5 +21,9 @@ public class Details {
 
     public double getPriceImport() {
         return priceImport;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

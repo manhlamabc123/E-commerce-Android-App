@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.oopproject.classes.Details;
 import com.example.oopproject.classes.Product;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,9 +22,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
@@ -81,8 +85,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                counter--;
-                textCounter.setText(String.valueOf(counter));
+                if(counter > 0) {
+                    counter--;
+                    textCounter.setText(String.valueOf(counter));
+                }
             }
         });
         plusButton.setOnClickListener(new View.OnClickListener() {
@@ -116,30 +122,34 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productManufacturer.setText("Manufacturer: " + product.getManufacturer());
                     productOS.setText("OS: " + product.getOs());
                     productScreen.setText("Screen: " + product.getScreen());
+
+    //                         ------------------------------Color Picker------------------------------
+                    final List<String> colorsPicker = new ArrayList<String>();
+                    for (int i = 0; i < product.getDetails().size(); i++) {
+                        colorsPicker.add(product.getDetails().get(i).getColor());
+                    }
+                    ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(ProductDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, colorsPicker); //selected item will look like a spinner set from XML
+                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    productColor.setAdapter(spinnerArrayAdapter);
+                    productColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            productPrice.setText("Price: " + product.getDetails().get(i).getPriceBuy());
+                            productMemory.setText("Memory: " + product.getDetails().get(i).getMemory());
+                            productRAM.setText("RAM: " + product.getDetails().get(i).getRam());
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+    //                        ------------------------------------------------------------------------------------------
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-//                        ------------------------------------------------------------------------------------------
-//                        ------------------------------Color Picker------------------------------
-        ArrayList<String> spinnerArray = new ArrayList<String>();
-        spinnerArray.add("Red");
-        spinnerArray.add("Blue");
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray); //selected item will look like a spinner set from XML
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        productColor.setAdapter(spinnerArrayAdapter);
-        productColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });

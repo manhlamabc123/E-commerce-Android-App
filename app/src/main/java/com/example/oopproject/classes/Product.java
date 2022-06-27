@@ -53,4 +53,14 @@ public class Product {
     public String getId() {
         return id;
     }
+
+    public ArrayList<String> colorArray() {
+        ArrayList<String> colors = new ArrayList<String>();
+
+        for(int i = 0; i < this.details.size(); i++) {
+            colors.add(this.details.get(i).getColor());
+        }
+
+        return colors;
+    }
 }
