@@ -20,7 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
@@ -52,7 +54,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 //                        ------------------------------Data from Home Activity------------------------------
-        productID = getIntent().getStringExtra("productName");
+        productID = getIntent().getStringExtra("productID");
 //                        ------------------------------------------------------------------------------------------
 //                        ------------------------------Connect to UI------------------------------
         minusButton = (ImageView) findViewById(R.id.image_minus);
@@ -95,7 +97,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                addingToCartList();
             }
         });
 //                        ------------------------------------------------------------------------------------------
@@ -106,14 +108,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Product product = snapshot.getValue(Product.class);
-                    productName.setText(product.getProductName());
+                    productName.setText(product.getName());
                     productWarranty.setText(String.valueOf(product.getWarranty()));
                     productCategory.setText(product.getCategory());
                     productDescription.setText(product.getDescription());
                     productInclude.setText(product.getInclude());
                     productManufacturer.setText(product.getManufacturer());
                     productOS.setText(product.getOs());
-                    productRAM.setText(String.valueOf(product.getProductName()));
+                    productRAM.setText(String.valueOf(product.getName()));
                     productScreen.setText(String.valueOf(product.getScreen()));
                 }
             }
@@ -143,5 +145,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 //                        ------------------------------------------------------------------------------------------
+    }
+
+    private void addingToCartList(){
+        String saveCurrentDate;
+
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-mm-dd");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
     }
 }

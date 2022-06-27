@@ -3,7 +3,8 @@ package com.example.oopproject.classes;
 import java.util.ArrayList;
 
 public class Product {
-    private String productName;
+    private String id;
+    private String name;
     private String category;
     private String manufacturer;
     private String include;
@@ -13,8 +14,8 @@ public class Product {
     private double warranty;
     private ArrayList<Details> details;
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
     public String getCategory() {
@@ -47,5 +48,9 @@ public class Product {
 
     public ArrayList<Details> getDetails() {
         return details;
+    }
+
+    public String getId() {
+        return id;
     }
 }

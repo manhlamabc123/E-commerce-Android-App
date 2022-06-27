@@ -102,7 +102,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
 
 //                        ------------------------------Retrieve Info from Database------------------------------
-                        holder.textProductName.setText(model.getProductName());
+                        holder.textProductName.setText(model.getName());
 //                        Picasso.get().load(model.getImage()).into(holder.imageView);
 //                        ------------------------------------------------------------------------------------------
 //                        ------------------------------to Product Details Activity------------------------------
@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                                intent.putExtra("productName", model.getProductName());
+                                intent.putExtra("productID", model.getId());
                                 startActivity(intent);
                             }
                         });
