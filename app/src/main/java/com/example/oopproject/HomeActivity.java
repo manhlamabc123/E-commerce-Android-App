@@ -164,6 +164,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_coupon:
+                Intent intent_coupon_activity = new Intent(HomeActivity.this, CouponActivity.class);
+                startActivity(intent_coupon_activity);
+                break;
             case R.id.nav_logout:
                 //            Paper.book().destroy();
                 Intent intent1 = new Intent(HomeActivity.this, MainActivity.class);
