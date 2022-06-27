@@ -108,15 +108,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Product product = snapshot.getValue(Product.class);
-                    productName.setText(product.getName());
-                    productWarranty.setText(String.valueOf(product.getWarranty()));
-                    productCategory.setText(product.getCategory());
-                    productDescription.setText(product.getDescription());
-                    productInclude.setText(product.getInclude());
-                    productManufacturer.setText(product.getManufacturer());
-                    productOS.setText(product.getOs());
-                    productRAM.setText(String.valueOf(product.getName()));
-                    productScreen.setText(String.valueOf(product.getScreen()));
+                    productName.setText("Name: " + product.getName());
+                    productWarranty.setText("Warranty: " + product.getWarranty());
+                    productCategory.setText("Category: " + product.getCategory());
+                    productDescription.setText("Description: " + product.getDescription());
+                    productInclude.setText("Include: " + product.getInclude());
+                    productManufacturer.setText("Manufacturer: " + product.getManufacturer());
+                    productOS.setText("OS: " + product.getOs());
+                    productScreen.setText("Screen: " + product.getScreen());
                 }
             }
 

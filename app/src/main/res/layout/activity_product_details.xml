@@ -19,10 +19,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/product_image_details"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="Product Name"
         android:textColor="@android:color/black"
-        android:textStyle="bold"
         android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/product_memory_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_name_details"
+        android:text="Product Memory"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/product_ram_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_memory_details"
+        android:text="Product RAM"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"/>
 
@@ -30,7 +54,7 @@
         android:id="@+id/product_warranty_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_name_details"
+        android:layout_below="@id/product_ram_details"
         android:text="Product Warranty"
         android:textColor="@android:color/black"
         android:textStyle="bold"
@@ -146,33 +170,11 @@
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:id="@+id/product_memory_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_manufacturer_details"
-        android:text="Product Memory"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
         android:id="@+id/product_os_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_memory_details"
+        android:layout_below="@id/product_manufacturer_details"
         android:text="Product OS"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/product_ram_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_os_details"
-        android:text="Product RAM"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:layout_marginLeft="10dp"
@@ -182,7 +184,7 @@
         android:id="@+id/product_screen_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_ram_details"
+        android:layout_below="@id/product_os_details"
         android:text="Product Screen"
         android:textColor="@android:color/black"
         android:textSize="16sp"
