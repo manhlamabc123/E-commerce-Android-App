@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.oopproject.classes.Details;
+import com.example.oopproject.classes.Order;
 import com.example.oopproject.classes.Product;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -99,7 +100,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 //                        ------------------------------------------------------------------------------------------
-//                        ------------------------------Counter Button------------------------------
+//                        ------------------------------Add to Cart Button------------------------------
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +108,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 //                        ------------------------------------------------------------------------------------------
-//                        ------------------------------Connect to UI------------------------------
+//                        ------------------------------Display Product's Detail------------------------------
         DatabaseReference productReference = FirebaseDatabase.getInstance().getReference().child("Product").child(productID);
         productReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -157,10 +158,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void addingToCartList(){
-        String saveCurrentDate;
-
+    //  -------------------------Get the today's date------------------------------
         Calendar calForDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-mm-dd");
-        saveCurrentDate = currentDate.format(calForDate.getTime());
+        String saveCurrentDate = currentDate.format(calForDate.getTime());
+    //  ---------------------------------------------------------------------------
     }
 }
