@@ -2,6 +2,7 @@ package com.example.oopproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +40,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference productReference;
+    private int productCounter = 1;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +54,104 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
         //-----------------------------------------------------------------
-        //-------------------------Floating Button-------------------------
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        //-------------------------Floating Forward Button-------------------------
+        FloatingActionButton fabForward = (FloatingActionButton) findViewById(R.id.fab_forward);
+        fabForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (productCounter < 100) {
+                    productCounter += 10;
+                    String productIdString = "P0" + productCounter;
+                    FirebaseRecyclerOptions<Product> options =
+                            new FirebaseRecyclerOptions.Builder<Product>()
+                                    .setQuery(productReference.orderByKey().startAt(productIdString).limitToFirst(10), Product.class)
+                                    .build();
+
+                    FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter =
+                            new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
+                                @Override
+                                protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
+
+//                        ------------------------------Retrieve Info from Database------------------------------
+                                    holder.textProductName.setText(model.getName());
+//                        Picasso.get().load(model.getImage()).into(holder.imageView);
+//                        ------------------------------------------------------------------------------------------
+//                        ------------------------------to Product Details Activity------------------------------
+                                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                                            intent.putExtra("productID", model.getId());
+                                            startActivity(intent);
+                                        }
+                                    });
+//                        ------------------------------------------------------------------------------------------
+                                }
+
+                                @NonNull
+                                @Override
+                                public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.products_items_layout, parent, false);
+                                    ProductViewHolder holder = new ProductViewHolder(view);
+                                    return holder;
+                                }
+                            };
+                    recyclerView.setAdapter(adapter);
+                    adapter.startListening();
+                } else {
+                    Log.d("WARNING", "Too many");
+                }
+            }
+        });
+        //-----------------------------------------------------------------
+        //-------------------------Floating Forward Button-------------------------
+        FloatingActionButton fabBackward = (FloatingActionButton) findViewById(R.id.fab_backward);
+        fabBackward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (productCounter > 10) {
+                    productCounter -= 10;
+                    String productIdString = "P0" + productCounter;
+                    if (productCounter <= 9 && productCounter >=1 ) productIdString = "P00" + productCounter;
+                    FirebaseRecyclerOptions<Product> options =
+                            new FirebaseRecyclerOptions.Builder<Product>()
+                                    .setQuery(productReference.orderByKey().startAt(productIdString).limitToFirst(10), Product.class)
+                                    .build();
+
+                    FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter =
+                            new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
+                                @Override
+                                protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
+
+//                        ------------------------------Retrieve Info from Database------------------------------
+                                    holder.textProductName.setText(model.getName());
+//                        Picasso.get().load(model.getImage()).into(holder.imageView);
+//                        ------------------------------------------------------------------------------------------
+//                        ------------------------------to Product Details Activity------------------------------
+                                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                                            intent.putExtra("productID", model.getId());
+                                            startActivity(intent);
+                                        }
+                                    });
+//                        ------------------------------------------------------------------------------------------
+                                }
+
+                                @NonNull
+                                @Override
+                                public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.products_items_layout, parent, false);
+                                    ProductViewHolder holder = new ProductViewHolder(view);
+                                    return holder;
+                                }
+                            };
+                    recyclerView.setAdapter(adapter);
+                    adapter.startListening();
+                } else {
+                    Log.d("WARNING", "Too many");
+                }
             }
         });
         //-----------------------------------------------------------------
@@ -91,9 +184,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override protected void onStart() {
         super.onStart();
 
+        String productIdString = "P0" + productCounter;
+        if (productCounter <= 9 && productCounter >=1 ) productIdString = "P00" + productCounter;
         FirebaseRecyclerOptions<Product> options =
                 new FirebaseRecyclerOptions.Builder<Product>()
-                        .setQuery(productReference.limitToFirst(10), Product.class)
+                        .setQuery(productReference.orderByKey().startAt(productIdString).limitToFirst(10), Product.class)
                         .build();
 
         FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter =
