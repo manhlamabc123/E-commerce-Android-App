@@ -67,19 +67,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/product_warranty_details"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="Product Price"
         android:textColor="@android:color/black"
-        android:textStyle="bold"
         android:textSize="16sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/product_quantity_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_price_details"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:text="Product Price"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/product_color_text_and_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/product_price_details">
+        android:layout_below="@id/product_quantity_details">
 
         <TextView
             android:id="@+id/product_color_details"

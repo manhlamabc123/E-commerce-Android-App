@@ -32,7 +32,6 @@ import java.util.List;
 public class ProductDetailsActivity extends AppCompatActivity {
 
     private String productID = "";
-    private String colorID = "";
     private int counter = 0;
 
     private ImageView minusButton;
@@ -51,6 +50,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private TextView productRAM;
     private TextView productScreen;
     private Spinner productColor;
+    private TextView productQuantity;
 
     private Button addToCartButton;
 
@@ -78,6 +78,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productRAM = (TextView) findViewById(R.id.product_ram_details);
         productScreen = (TextView) findViewById(R.id.product_screen_details);
         productColor = (Spinner) findViewById(R.id.product_color_picker);
+        productQuantity = (TextView) findViewById(R.id.product_quantity_details);
 
         addToCartButton = (Button) findViewById(R.id.product_add_to_cart_btn);
 //                        ------------------------------------------------------------------------------------------
@@ -138,6 +139,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             productPrice.setText("Price: " + product.getDetails().get(i).getPriceBuy());
                             productMemory.setText("Memory: " + product.getDetails().get(i).getMemory());
                             productRAM.setText("RAM: " + product.getDetails().get(i).getRam());
+                            productQuantity.setText("Quantity: " + product.getDetails().get(i).getQuantity());
                         }
 
                         @Override

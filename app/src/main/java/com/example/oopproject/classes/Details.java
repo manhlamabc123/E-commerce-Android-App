@@ -6,6 +6,7 @@ public class Details {
     private double priceBuy;
     private double priceImport;
     private String color;
+    private double quantity;
 
     public double getRam() {
         return ram;
@@ -25,5 +26,9 @@ public class Details {
 
     public String getColor() {
         return color;
+    }
+
+    public double getQuantity() {
+        return quantity;
     }
 }
