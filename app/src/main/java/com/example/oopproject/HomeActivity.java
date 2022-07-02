@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.oopproject.classes.Product;
+import com.example.oopproject.Prevalent.Prevalent;
 import com.example.oopproject.classes_for_controll.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -182,8 +183,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
-        userNameTextView.setText("User");
-//        userNameTextView.setText(Prevalent.currentOnlineUser.getName());
+//        userNameTextView.setText("User");
+        userNameTextView.setText(Prevalent.currentCustomer.getName());
 //        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
         //-----------------------------------------------------------------
         //-------------------------Show Products on screen-------------------------

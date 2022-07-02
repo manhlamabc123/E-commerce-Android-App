@@ -12,16 +12,6 @@ public class Customer extends Person{
         return image;
     }
 
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
-
-    private String Password;
-
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
