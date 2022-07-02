@@ -277,7 +277,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent_coupon_activity);
                 break;
             case R.id.nav_logout:
-                //            Paper.book().destroy();
+                Paper.book().destroy();
                 Intent intent1 = new Intent(HomeActivity.this, MainActivity.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent1);
