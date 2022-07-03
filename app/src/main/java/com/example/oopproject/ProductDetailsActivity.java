@@ -136,7 +136,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            productPrice.setText("Price: " + product.getDetails().get(i).getPriceBuy());
+                            productPrice.setText("Price: " + product.getDetails().get(i).getPrice());
                             productMemory.setText("Memory: " + product.getDetails().get(i).getMemory());
                             productRAM.setText("RAM: " + product.getDetails().get(i).getRam());
                             productQuantity.setText("Quantity: " + product.getDetails().get(i).getQuantity());
