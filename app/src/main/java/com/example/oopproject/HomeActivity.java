@@ -1,5 +1,7 @@
 package com.example.oopproject;
 
+import static android.view.View.*;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,9 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.oopproject.classes.Product;
+import com.example.oopproject.Prevalent.Prevalent;
 import com.example.oopproject.classes_for_controll.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -29,6 +33,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -36,10 +41,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference productReference;
     private int productCounter = 1;
+//    private Button LogoutBtn;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+//        LogoutBtn = (Button)findViewById(R.id.nav_logout);
+//
+//        LogoutBtn.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Paper.book().destroy();
+//
+//                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         //-------------------------Get product's data from server-------------------------
         productReference = FirebaseDatabase.getInstance().getReference().child("Product");
@@ -51,7 +70,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //-----------------------------------------------------------------
         //-------------------------Floating Forward Button-------------------------
         FloatingActionButton fabForward = (FloatingActionButton) findViewById(R.id.fab_forward);
-        fabForward.setOnClickListener(new View.OnClickListener() {
+        fabForward.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (productCounter < 100) {
@@ -72,7 +91,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                        Picasso.get().load(model.getImage()).into(holder.imageView);
 //                        ------------------------------------------------------------------------------------------
 //                        ------------------------------to Product Details Activity------------------------------
-                                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                    holder.itemView.setOnClickListener(new OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
@@ -101,7 +120,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //-----------------------------------------------------------------
         //-------------------------Floating Forward Button-------------------------
         FloatingActionButton fabBackward = (FloatingActionButton) findViewById(R.id.fab_backward);
-        fabBackward.setOnClickListener(new View.OnClickListener() {
+        fabBackward.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (productCounter > 10) {
@@ -123,7 +142,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                        Picasso.get().load(model.getImage()).into(holder.imageView);
 //                        ------------------------------------------------------------------------------------------
 //                        ------------------------------to Product Details Activity------------------------------
-                                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                    holder.itemView.setOnClickListener(new OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
@@ -164,8 +183,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
-        userNameTextView.setText("User");
-//        userNameTextView.setText(Prevalent.currentOnlineUser.getName());
+//        userNameTextView.setText("User");
+        userNameTextView.setText(Prevalent.currentCustomer.getName());
 //        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
         //-----------------------------------------------------------------
         //-------------------------Show Products on screen-------------------------
@@ -196,7 +215,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                        Picasso.get().load(model.getImage()).into(holder.imageView);
 //                        ------------------------------------------------------------------------------------------
 //                        ------------------------------to Product Details Activity------------------------------
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        holder.itemView.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
@@ -259,7 +278,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent_coupon_activity);
                 break;
             case R.id.nav_logout:
-                //            Paper.book().destroy();
+                Paper.book().destroy();
                 Intent intent1 = new Intent(HomeActivity.this, MainActivity.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent1);

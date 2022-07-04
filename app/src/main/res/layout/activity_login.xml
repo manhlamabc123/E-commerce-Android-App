@@ -59,7 +59,7 @@
         android:layout_marginTop="5dp"
         >
 
-        <com.rey.material.widget.CheckBox
+        <android.widget.CheckBox
             android:id="@+id/remember_me_chkb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
