@@ -1,12 +1,15 @@
 package com.example.oopproject.classes;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Customer extends Person{
     private Date dateOfBirth;
     private String gender;
     private String DC_id;
     private String image;
+    private List<Product> cart = new ArrayList<Product>();
 
     public String getImage() {
         return image;
@@ -48,5 +51,12 @@ public class Customer extends Person{
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public void addProductToCart(Product product) {
+        if (this.cart.contains(product)) {
+
+        }
+        this.cart.add(product);
     }
 }

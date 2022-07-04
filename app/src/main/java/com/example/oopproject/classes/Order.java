@@ -1,12 +1,13 @@
 package com.example.oopproject.classes;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private String id;
-    private Customer customer;
-    private Agency agency;
+    private String customerId;
     private Employee employee;
     private Date buyDate;
-    private String purchaseFrom;
+    private List<Product> products = new ArrayList<Product>();
 }
