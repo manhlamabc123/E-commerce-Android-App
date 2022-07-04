@@ -14,92 +14,179 @@
         android:layout_height="260dp"
         android:scaleType="centerCrop" />
 
-    <TextView
-        android:id="@+id/product_name_details"
+    <LinearLayout
+        android:id="@+id/product_name_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_image_details"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Product Name"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_below="@id/product_image_details">
 
-    <TextView
-        android:id="@+id/product_memory_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_name_details"
-        android:text="Product Memory"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Product:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/product_ram_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_memory_details"
-        android:text="Product RAM"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/product_name_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
 
-    <TextView
-        android:id="@+id/product_warranty_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_ram_details"
-        android:text="Product Warranty"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/product_price_details"
+    <LinearLayout
+        android:id="@+id/product_memory_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_warranty_details"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Product Price"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/product_quantity_details"
+        android:layout_below="@id/product_name_details_line">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Memory:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_memory_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_ram_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_price_details"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Product Price"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_below="@id/product_memory_details_line">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="RAM:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_ram_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_warranty_details_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_ram_details_line">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Warranty:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_warranty_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_price_details_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_warranty_details_line">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Price:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_price_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_quantity_details_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_price_details_line">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Quantity:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_quantity_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/product_color_text_and_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/product_quantity_details">
+        android:layout_below="@id/product_quantity_details_line">
 
         <TextView
             android:id="@+id/product_color_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Color: "
+            android:text="Color:"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_marginLeft="10dp"/>
 
         <Spinner
@@ -128,81 +215,168 @@
         android:id="@+id/product_detail_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product's details"
+        android:text="More details"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_below="@id/product_detail_header_line"
         android:gravity="center" />
 
-
-    <TextView
-        android:id="@+id/product_category_details"
+    <LinearLayout
+        android:id="@+id/product_category_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_detail_header"
-        android:text="Product Category"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_below="@id/product_detail_header">
 
-    <TextView
-        android:id="@+id/product_description_details"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Category:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_category_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_description_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_category_details"
-        android:text="Product Description"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_below="@id/product_category_details_line">
 
-    <TextView
-        android:id="@+id/product_include_details"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Description:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_description_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_include_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_description_details"
-        android:text="Product Include"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@id/product_description_details_line">
 
-    <TextView
-        android:id="@+id/product_manufacturer_details"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Include:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_include_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_manufacturer_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_include_details"
-        android:text="Product Manufacturer"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@id/product_include_details_line">
 
-    <TextView
-        android:id="@+id/product_os_details"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Manufacturer:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_manufacturer_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_os_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_manufacturer_details"
-        android:text="Product OS"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@id/product_manufacturer_details_line">
 
-    <TextView
-        android:id="@+id/product_screen_details"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="OS:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_os_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_screen_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_os_details"
-        android:text="Product Screen"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@id/product_os_details_line">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Screen:"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
+        <TextView
+            android:id="@+id/product_screen_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Not found!!!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/counter_btn"
@@ -210,30 +384,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/product_color_text_and_picker"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/image_minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_minus" />
+            app:srcCompat="@drawable/ic_minus"/>
 
         <TextView
             android:id="@+id/text_counter"
             android:layout_width="50dp"
             android:layout_height="53dp"
-            android:text="1"
+            android:text="0"
             android:gravity="center"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"/>
 
         <ImageView
             android:id="@+id/image_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_plus" />
+            app:srcCompat="@drawable/ic_plus"/>
 
     </LinearLayout>
 

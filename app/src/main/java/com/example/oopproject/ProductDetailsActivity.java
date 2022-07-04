@@ -116,14 +116,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Product product = snapshot.getValue(Product.class);
-                    productName.setText("Name: " + product.getName());
-                    productWarranty.setText("Warranty: " + product.getWarranty());
-                    productCategory.setText("Category: " + product.getCategory());
-                    productDescription.setText("Description: " + product.getDescription());
-                    productInclude.setText("Include: " + product.getInclude());
-                    productManufacturer.setText("Manufacturer: " + product.getManufacturer());
-                    productOS.setText("OS: " + product.getOs());
-                    productScreen.setText("Screen: " + product.getScreen());
+                    productName.setText(product.getName());
+                    productWarranty.setText(product.getWarranty() + "");
+                    productCategory.setText(product.getCategory());
+                    productDescription.setText(product.getDescription());
+                    productInclude.setText(product.getInclude());
+                    productManufacturer.setText(product.getManufacturer());
+                    productOS.setText(product.getOs());
+                    productScreen.setText(product.getScreen() + "");
 
     //                         ------------------------------Color Picker------------------------------
                     final List<String> colorsPicker = new ArrayList<String>();
@@ -136,10 +136,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            productPrice.setText("Price: " + product.getDetails().get(i).getPrice());
-                            productMemory.setText("Memory: " + product.getDetails().get(i).getMemory());
-                            productRAM.setText("RAM: " + product.getDetails().get(i).getRam());
-                            productQuantity.setText("Quantity: " + product.getDetails().get(i).getQuantity());
+                            productPrice.setText(product.getDetails().get(i).getPrice() + "");
+                            productMemory.setText(product.getDetails().get(i).getMemory() + "");
+                            productRAM.setText(product.getDetails().get(i).getRam() + "");
+                            productQuantity.setText((int)(product.getDetails().get(i).getQuantity()) + "");
                         }
 
                         @Override
