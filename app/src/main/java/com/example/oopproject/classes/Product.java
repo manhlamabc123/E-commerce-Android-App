@@ -53,4 +53,20 @@ public class Product {
     public String getId() {
         return id;
     }
+
+    public Product(String id, String name, String category, String manufacturer, String include, String os, double screen, String description, double warranty, ArrayList<Details> details) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.manufacturer = manufacturer;
+        this.include = include;
+        this.os = os;
+        this.screen = screen;
+        this.description = description;
+        this.warranty = warranty;
+        this.details = details;
+    }
+
+    public Product() {
+    }
 }

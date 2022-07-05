@@ -46,9 +46,20 @@ public class Customer extends Person{
     }
 
     public void addProductToCart(Product product) {
-        if (this.cart.contains(product)) {
-
-        }
         this.cart.add(product);
+    }
+
+    public List<Product> getCart() {
+        return cart;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("password", this.getPassword());
+        result.put("name", this.getName());
+        result.put("phone", this.getPhone());
+        result.put("cart", this.getCart());
+
+        return result;
     }
 }

@@ -58,6 +58,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private Spinner productColor;
     private TextView productQuantity;
 
+    private ProgressDialog loadingBar;
+
     private Button addToCartButton;
 
     @Override
@@ -87,6 +89,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productQuantity = (TextView) findViewById(R.id.product_quantity_details);
 
         addToCartButton = (Button) findViewById(R.id.product_add_to_cart_btn);
+
+        loadingBar = new ProgressDialog(this);
 //                        ------------------------------------------------------------------------------------------
 //                        ------------------------------Counter Button------------------------------
         textCounter.setText(String.valueOf(counter));
@@ -111,7 +115,62 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addingToCartList();
+                loadingBar.setTitle("Please wait.");
+                loadingBar.setMessage("Adding to cart...");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
+
+                Details details = new Details(Double.parseDouble(productRAM.getText().toString()),
+                        Double.parseDouble(productMemory.getText().toString()),
+                        Double.parseDouble(productPrice.getText().toString()),
+                        productColor.getSelectedItem().toString(),
+                        Double.parseDouble(textCounter.getText().toString()));
+                ArrayList<Details> detailsArrayList = new ArrayList<>();
+                detailsArrayList.add(details);
+                Product product = new Product(productID,
+                        productName.getText().toString(),
+                        productCategory.getText().toString(),
+                        productManufacturer.getText().toString(),
+                        productInclude.getText().toString(),
+                        productOS.getText().toString(),
+                        Double.parseDouble(productScreen.getText().toString()),
+                        productDescription.getText().toString(),
+                        Double.parseDouble(productWarranty.getText().toString()),
+                        detailsArrayList);
+                Prevalent.currentCustomer.addProductToCart(product);
+
+                DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference().child("Customer");
+                Query query = customerReference.orderByChild("phone").equalTo(Prevalent.currentCustomer.getPhone());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.child(Prevalent.currentCustomer.getPhone()).exists()) {
+                            Map<String, Object> userdataMap = Prevalent.currentCustomer.toMap();
+
+                            FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.currentCustomer.getPhone()).updateChildren(userdataMap)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(ProductDetailsActivity.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+                                                loadingBar.dismiss();
+                                                Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                            }
+                                            else {
+                                                loadingBar.dismiss();
+                                                Toast.makeText(ProductDetailsActivity.this, "Network error! Please try again later.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        System.out.println(error.toString());
+                    }
+                });
             }
         });
 //                        ------------------------------------------------------------------------------------------

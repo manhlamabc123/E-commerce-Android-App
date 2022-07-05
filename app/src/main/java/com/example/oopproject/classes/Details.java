@@ -26,4 +26,15 @@ public class Details {
     public double getPrice() {
         return price;
     }
+
+    public Details(double ram, double memory, double price, String color, double quantity) {
+        this.ram = ram;
+        this.memory = memory;
+        this.price = price;
+        this.color = color;
+        this.quantity = quantity;
+    }
+
+    public Details() {
+    }
 }
