@@ -99,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                     userdataMap.put("phone", phone);
                     userdataMap.put("password", pasword);
                     userdataMap.put("name", name);
+                    userdataMap.put("cart", null);
 
                     RootRef.child("Customer").child(phone).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
