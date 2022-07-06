@@ -1,6 +1,8 @@
 package com.example.oopproject.classes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Product {
     private String id;
@@ -68,5 +70,30 @@ public class Product {
     }
 
     public Product() {
+    }
+
+    public void setQuantity(String color, double quantity) {
+        for (int i = 0; i < this.getDetails().size(); i++) {
+            if (this.getDetails().get(i).getColor().equals(color)) {
+                this.getDetails().get(i).setQuantity(quantity);
+            }
+        }
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<java.lang.String, java.lang.Object> result = new HashMap<>();
+
+        result.put("category", this.getCategory());
+        result.put("description", this.getDescription());
+        result.put("details", this.getDetails());
+        result.put("id", this.getId());
+        result.put("include", this.getInclude());
+        result.put("manufacturer", this.getManufacturer());
+        result.put("name", this.getName());
+        result.put("os", this.getOs());
+        result.put("screen", this.getScreen());
+        result.put("warranty", this.getWarranty());
+
+        return result;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.oopproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -20,6 +21,7 @@ import com.example.oopproject.classes.Details;
 import com.example.oopproject.classes.Product;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -144,39 +147,74 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 Prevalent.currentCustomer.addProductToCart(product);
                 //------------------------------------------------------------------------------------------
 
-                //-------------------On Server: Update Customer's Cart-------------------
-                DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference().child("Customer");
-                Query query = customerReference.orderByChild("phone").equalTo(Prevalent.currentCustomer.getPhone());
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.child(Prevalent.currentCustomer.getPhone()).exists()) {
-                            Map<String, Object> userdataMap = Prevalent.currentCustomer.toMap();
+                //-------------------Update Product's Quantity-------------------
+                double check = Double.parseDouble(productQuantity.getText().toString()) - (double) counter;
+                System.out.println(check);
+                if (check < 0) {
+                    loadingBar.dismiss();
+                    Toast.makeText(ProductDetailsActivity.this, "Over order :v", Toast.LENGTH_SHORT).show();
+                } else {
+                    DatabaseReference productReference = FirebaseDatabase.getInstance().getReference().child("Product").child(productID);
+                    productReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                //-------------------Local: update Product-------------------
+                                Product product1 = snapshot.getValue(Product.class);
+                                System.out.println(check);
+                                product1.setQuantity(productColor.getSelectedItem().toString(), check);
+                                System.out.println(product1.getDetails().get(0).getQuantity());
+                                //------------------------------------------------------------------------------
 
-                            FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.currentCustomer.getPhone()).updateChildren(userdataMap)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(ProductDetailsActivity.this, "Added to Cart", Toast.LENGTH_SHORT).show();
-                                                loadingBar.dismiss();
-                                                Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
-                                                startActivity(intent);
-                                            }
-                                            else {
-                                                loadingBar.dismiss();
-                                                Toast.makeText(ProductDetailsActivity.this, "Network error! Please try again later.", Toast.LENGTH_SHORT).show();
-                                            }
+                                //-------------------On Server: Update Product's Quantity-------------------
+                                DatabaseReference productReference1 = FirebaseDatabase.getInstance().getReference().child("Product").child(productID);
+                                productReference1.updateChildren(product1.toMap());
+                                //------------------------------------------------------------------------------
+
+                                //-------------------On Server: Update Customer's Cart-------------------
+                                DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference().child("Customer");
+                                Query query = customerReference.orderByChild("phone").equalTo(Prevalent.currentCustomer.getPhone());
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.child(Prevalent.currentCustomer.getPhone()).exists()) {
+                                            Map<String, Object> userdataMap = Prevalent.currentCustomer.toMap();
+
+                                            FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.currentCustomer.getPhone()).updateChildren(userdataMap)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Toast.makeText(ProductDetailsActivity.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+                                                                loadingBar.dismiss();
+                                                                Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
+                                                                startActivity(intent);
+                                                            }
+                                                            else {
+                                                                loadingBar.dismiss();
+                                                                Toast.makeText(ProductDetailsActivity.this, "Network error! Please try again later.", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
                                         }
-                                    });
-                        }
-                    }
+                                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        System.out.println(error.toString());
-                    }
-                });
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        System.out.println(error.toString());
+                                    }
+                                });
+                                //-----------------------------------------------------------------------------------------
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
                 //------------------------------------------------------------------------------------------
             }
         });

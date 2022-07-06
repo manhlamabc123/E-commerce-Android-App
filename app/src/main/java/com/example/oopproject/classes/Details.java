@@ -37,4 +37,8 @@ public class Details {
 
     public Details() {
     }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
 }
