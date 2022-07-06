@@ -27,11 +27,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,18 +56,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private Spinner productColor;
     private TextView productQuantity;
 
-    private ProgressDialog loadingBar;
-
     private Button addToCartButton;
+
+    private ProgressDialog loadingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-//                        ------------------------------Data from Home Activity------------------------------
+        //------------------------------Data from Home Activity------------------------------
         productID = getIntent().getStringExtra("productID");
-//                        ------------------------------------------------------------------------------------------
-//                        ------------------------------Connect to UI------------------------------
+        //------------------------------------------------------------------------------------------
+
+        //------------------------------Connect to UI------------------------------
         minusButton = (ImageView) findViewById(R.id.image_minus);
         plusButton = (ImageView) findViewById(R.id.image_plus);
         textCounter = (TextView) findViewById(R.id.text_counter);
@@ -91,8 +90,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToCartButton = (Button) findViewById(R.id.product_add_to_cart_btn);
 
         loadingBar = new ProgressDialog(this);
-//                        ------------------------------------------------------------------------------------------
-//                        ------------------------------Counter Button------------------------------
+        //------------------------------------------------------------------------------------------
+
+        //------------------------------Counter Button------------------------------
         textCounter.setText(String.valueOf(counter));
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,16 +110,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 textCounter.setText(String.valueOf(counter));
             }
         });
-//                        ------------------------------------------------------------------------------------------
-//                        ------------------------------Add to Cart Button------------------------------
+        //------------------------------------------------------------------------------------------
+
+        //------------------------------Add to Cart Button------------------------------
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadingBar.setTitle("Please wait.");
+                //-------------------Loading Bar-------------------
+                loadingBar.setTitle("Please wait!!!");
                 loadingBar.setMessage("Adding to cart...");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
+                //------------------------------------------------------------------------------------------
 
+                //-------------------Create Cart and Add the current Product to it-------------------
                 Details details = new Details(Double.parseDouble(productRAM.getText().toString()),
                         Double.parseDouble(productMemory.getText().toString()),
                         Double.parseDouble(productPrice.getText().toString()),
@@ -138,7 +142,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         Double.parseDouble(productWarranty.getText().toString()),
                         detailsArrayList);
                 Prevalent.currentCustomer.addProductToCart(product);
+                //------------------------------------------------------------------------------------------
 
+                //-------------------On Server: Update Customer's Cart-------------------
                 DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference().child("Customer");
                 Query query = customerReference.orderByChild("phone").equalTo(Prevalent.currentCustomer.getPhone());
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -171,10 +177,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         System.out.println(error.toString());
                     }
                 });
+                //------------------------------------------------------------------------------------------
             }
         });
-//                        ------------------------------------------------------------------------------------------
-//                        ------------------------------Display Product's Detail------------------------------
+        //------------------------------------------------------------------------------------------
+
+        //------------------------------Display Product's Detail------------------------------
         DatabaseReference productReference = FirebaseDatabase.getInstance().getReference().child("Product").child(productID);
         productReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -190,7 +198,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productOS.setText(product.getOs());
                     productScreen.setText(product.getScreen() + "");
 
-    //                         ------------------------------Color Picker------------------------------
+                    //------------------------------Color Picker------------------------------
                     final List<String> colorsPicker = new ArrayList<String>();
                     for (int i = 0; i < product.getDetails().size(); i++) {
                         colorsPicker.add(product.getDetails().get(i).getColor());
@@ -212,7 +220,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                         }
                     });
-    //                        ------------------------------------------------------------------------------------------
+                    //------------------------------------------------------------------------------------------
                 }
             }
 
@@ -221,14 +229,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             }
         });
-//                        ------------------------------------------------------------------------------------------
-    }
-
-    private void addingToCartList(){
-    //  -------------------------Get the today's date------------------------------
-        Calendar calForDate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-mm-dd");
-        String saveCurrentDate = currentDate.format(calForDate.getTime());
-    //  ---------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------
     }
 }
