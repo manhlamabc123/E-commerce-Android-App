@@ -30,14 +30,25 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        //--------------------------Connect to UI--------------------------
         recyclerView = findViewById(R.id.cart_list);
+        nextProcessBtn = (Button) findViewById(R.id.next_process_btn);
+        textTotalAmount = (TextView) findViewById(R.id.total_price);
+        //------------------------------------------------------------------------------
+
+        //--------------------------Recycler View--------------------------
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         adapter = new CartAdapter(Prevalent.currentCustomer.getCart());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        //------------------------------------------------------------------------------
 
-        nextProcessBtn = (Button) findViewById(R.id.next_process_btn);
-        textTotalAmount = (TextView) findViewById(R.id.total_price);
+        //--------------------------Total Price Text--------------------------
+        textTotalAmount.setText(Prevalent.currentCustomer.getTotalPriceOfCart());
+        //------------------------------------------------------------------------------
+
+        //------------------------------Next Button--------------------------
+        //------------------------------------------------------------------------------
     }
 }
