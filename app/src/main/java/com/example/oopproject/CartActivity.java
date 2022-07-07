@@ -1,12 +1,17 @@
 package com.example.oopproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.oopproject.Prevalent.Prevalent;
 import com.example.oopproject.classes.Product;
@@ -49,6 +54,13 @@ public class CartActivity extends AppCompatActivity {
         //------------------------------------------------------------------------------
 
         //------------------------------Next Button--------------------------
+        nextProcessBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+                startActivity(intent);
+            }
+        });
         //------------------------------------------------------------------------------
     }
 }
