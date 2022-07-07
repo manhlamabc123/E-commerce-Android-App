@@ -22,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.internal.InternalTokenProvider;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -261,7 +262,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_cart:
-                System.out.println("Cart");
+                Intent intentCartActivity = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intentCartActivity);
                 break;
             case R.id.nav_orders:
                 System.out.println("Orders");

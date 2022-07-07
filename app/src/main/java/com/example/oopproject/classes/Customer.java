@@ -11,7 +11,7 @@ public class Customer extends Person{
     private String gender;
     private String DC_id;
     private String image;
-    private List<Product> cart = new ArrayList<Product>();
+    private ArrayList<Product> cart = new ArrayList<Product>();
 
     public String getImage() {
         return image;
@@ -56,7 +56,7 @@ public class Customer extends Person{
         this.getCart().add(product);
     }
 
-    public List<Product> getCart() {
+    public ArrayList<Product> getCart() {
         return cart;
     }
 
