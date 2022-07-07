@@ -46,7 +46,14 @@ public class Customer extends Person{
     }
 
     public void addProductToCart(Product product) {
-        this.cart.add(product);
+        for (int i = 0; i < this.getCart().size(); i ++){
+            if (this.getCart().get(i).getId().equals(product.getId())) {
+                this.getCart().get(i).setQuantity(product.getDetails().get(0).getColor(),
+                        this.getCart().get(i).getDetails().get(0).getQuantity() + product.getDetails().get(0).getQuantity());
+                return;
+            }
+        }
+        this.getCart().add(product);
     }
 
     public List<Product> getCart() {
