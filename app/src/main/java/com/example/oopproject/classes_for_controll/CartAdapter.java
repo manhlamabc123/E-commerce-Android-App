@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.oopproject.R;
 import com.example.oopproject.classes.Product;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
@@ -30,9 +31,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
-        holder.productQuantity.setText(String.valueOf(cart.get(position).getDetails().get(0).getQuantity()));
+        DecimalFormat REAL_FORMATTER = new DecimalFormat("0.###");
+        holder.productQuantity.setText(REAL_FORMATTER.format(cart.get(position).getDetails().get(0).getQuantity()));
         holder.productName.setText(cart.get(position).getName());
-        holder.productPrice.setText(String.valueOf(cart.get(position).getDetails().get(0).getPrice()));
+        holder.productPrice.setText(REAL_FORMATTER.format(cart.get(position).getDetails().get(0).getPrice()));
     }
 
     @Override
