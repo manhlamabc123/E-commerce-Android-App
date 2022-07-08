@@ -51,6 +51,7 @@
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/drawable/ic_menu_manage.xml" value="0.1" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/drawable/ic_minus.xml" value="0.1" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/drawable/ic_plus.xml" value="0.1835" />
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/drawable/ic_search.xml" value="0.183" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_cart.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_confirm_final_order.xml" value="0.275" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_coupon.xml" value="0.275" />
@@ -59,6 +60,7 @@
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_main.xml" value="0.275" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_product_details.xml" value="0.264" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_register.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_search.xml" value="0.275" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_settings.xml" value="0.2477355072463768" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/app_bar_home.xml" value="0.264" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/cart_items_layout.xml" value="0.264" />

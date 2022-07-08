@@ -13,9 +13,6 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".CouponActivity"
-            android:exported="false" />
-        <activity
             android:name=".ConfirmFinalOrderActivity"
             android:exported="false" />
         <activity
