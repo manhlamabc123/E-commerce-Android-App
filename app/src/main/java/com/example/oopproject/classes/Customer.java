@@ -79,4 +79,8 @@ public class Customer extends Person{
         DecimalFormat REAL_FORMATTER = new DecimalFormat("0.###");
         return REAL_FORMATTER.format(totalPrice);
     }
+
+    public void removeItemFromCart(int position) {
+        this.getCart().remove(position);
+    }
 }

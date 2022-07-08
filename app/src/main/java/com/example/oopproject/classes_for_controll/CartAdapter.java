@@ -1,5 +1,6 @@
 package com.example.oopproject.classes_for_controll;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,23 +11,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oopproject.R;
 import com.example.oopproject.classes.Product;
+import com.example.oopproject.interfaces.ItemClickListener;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
+    private final ItemClickListener itemClickListener;
     private ArrayList<Product> cart;
+    private Context context;
 
-    public CartAdapter(ArrayList<Product> cart) {
+    public CartAdapter(ItemClickListener itemClickListener, ArrayList<Product> cart, Context context) {
+        this.itemClickListener = itemClickListener;
         this.cart = cart;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public CartAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, itemClickListener);
     }
 
     @Override
@@ -48,12 +54,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public TextView productPrice;
         public TextView productQuantity;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, ItemClickListener itemClickListener) {
             super(itemView);
 
             productName = (TextView) itemView.findViewById(R.id.cart_product_name);
             productPrice = (TextView) itemView.findViewById(R.id.cart_product_price);
             productQuantity = (TextView) itemView.findViewById(R.id.cart_product_quantity);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (itemClickListener != null) {
+                        int pos = getAbsoluteAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            itemClickListener.onClick(view, pos, false);
+                        }
+                    }
+                }
+            });
         }
     }
 }
