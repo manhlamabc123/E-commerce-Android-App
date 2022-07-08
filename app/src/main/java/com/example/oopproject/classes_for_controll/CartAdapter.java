@@ -13,6 +13,8 @@ import com.example.oopproject.R;
 import com.example.oopproject.classes.Product;
 import com.example.oopproject.interfaces.ItemClickListener;
 
+import org.w3c.dom.Text;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -41,6 +43,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.productQuantity.setText(REAL_FORMATTER.format(cart.get(position).getDetails().get(0).getQuantity()));
         holder.productName.setText(cart.get(position).getName());
         holder.productPrice.setText(REAL_FORMATTER.format(cart.get(position).getDetails().get(0).getPrice()));
+        holder.productColor.setText(cart.get(position).getDetails().get(0).getColor());
     }
 
     @Override
@@ -53,6 +56,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public TextView productName;
         public TextView productPrice;
         public TextView productQuantity;
+        public TextView productColor;
 
         public ViewHolder(@NonNull View itemView, ItemClickListener itemClickListener) {
             super(itemView);
@@ -60,6 +64,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             productName = (TextView) itemView.findViewById(R.id.cart_product_name);
             productPrice = (TextView) itemView.findViewById(R.id.cart_product_price);
             productQuantity = (TextView) itemView.findViewById(R.id.cart_product_quantity);
+            productColor = (TextView) itemView.findViewById(R.id.cart_product_color);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
