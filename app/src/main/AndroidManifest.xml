@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OOPProject">
         <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".CouponActivity"
             android:exported="false" />
         <activity
@@ -44,11 +47,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"-->
-<!--            android:theme="@style/Base.Theme.AppCompat"/>-->
     </application>
-
-<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
 
 </manifest>

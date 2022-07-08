@@ -268,16 +268,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_orders:
                 System.out.println("Orders");
                 break;
-            case R.id.nav_categories:
-                System.out.println("Categories");
+            case R.id.nav_search:
+                Intent intentSearch = new Intent(HomeActivity.this, SearchActivity.class);
+                startActivity(intentSearch);
                 break;
             case R.id.nav_settings:
                 Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.nav_coupon:
-                Intent intent_coupon_activity = new Intent(HomeActivity.this, CouponActivity.class);
-                startActivity(intent_coupon_activity);
                 break;
             case R.id.nav_logout:
                 Paper.book().destroy();
