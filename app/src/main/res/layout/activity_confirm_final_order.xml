@@ -18,46 +18,163 @@
         android:textAlignment="center"
         android:textStyle="bold"/>
 
-    <EditText
-        android:id="@+id/payment_name"
+    <LinearLayout
+        android:id="@+id/payment_name_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="your Name"/>
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp">
 
-    <EditText
-        android:id="@+id/payment_phone_number"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginRight="5dp"/>
+
+        <EditText
+            android:id="@+id/payment_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="your Name" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/payment_phone_number_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/payment_name"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:inputType="number"
-        android:hint="your Phone Number"/>
+        android:layout_below="@+id/payment_name_line"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
 
-    <EditText
-        android:id="@+id/payment_address"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone Number:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginRight="5dp"/>
+
+        <EditText
+            android:id="@+id/payment_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="your Phone Number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/payment_province_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/payment_phone_number"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="your Address"/>
+        android:layout_below="@+id/payment_phone_number_line"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
 
-    <EditText
-        android:id="@+id/payment_city"
+        <TextView
+            android:id="@+id/payment_province_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Province:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginRight="5dp"/>
+
+        <Spinner
+            android:id="@+id/payment_province_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBaseline="@id/payment_method_text"
+            android:layout_toRightOf="@id/payment_method_text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/payment_district_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/payment_address"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="your City"/>
+        android:layout_below="@+id/payment_province_line"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/payment_district_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="District:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginRight="5dp"/>
+
+        <Spinner
+            android:id="@+id/payment_district_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBaseline="@id/payment_method_text"
+            android:layout_toRightOf="@id/payment_method_text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/payment_ward_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/payment_district_line"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/payment_ward_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ward:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginRight="5dp"/>
+
+        <Spinner
+            android:id="@+id/payment_ward_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBaseline="@id/payment_method_text"
+            android:layout_toRightOf="@id/payment_method_text"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/payment_method_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/payment_ward_line"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/payment_method_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payment Method:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginRight="5dp"/>
+
+        <Spinner
+            android:id="@+id/payment_method_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBaseline="@id/payment_method_text"
+            android:layout_toRightOf="@id/payment_method_text"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/confirm_payment_btn"
@@ -71,3 +188,4 @@
         android:textSize="20dp"/>
 
 </RelativeLayout>
+
