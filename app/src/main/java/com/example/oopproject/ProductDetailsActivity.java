@@ -149,7 +149,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                 //-------------------Update Product's Quantity-------------------
                 double check = Double.parseDouble(productQuantity.getText().toString()) - (double) counter;
-                System.out.println(check);
                 if (check < 0) {
                     loadingBar.dismiss();
                     Toast.makeText(ProductDetailsActivity.this, "Over order :v", Toast.LENGTH_SHORT).show();
@@ -161,9 +160,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             if (snapshot.exists()) {
                                 //-------------------Local: update Product-------------------
                                 Product product1 = snapshot.getValue(Product.class);
-                                System.out.println(check);
                                 product1.setQuantity(productColor.getSelectedItem().toString(), check);
-                                System.out.println(product1.getDetails().get(0).getQuantity());
                                 //------------------------------------------------------------------------------
 
                                 //-------------------On Server: Update Product's Quantity-------------------
@@ -213,7 +210,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                         }
                     });
-
                 }
                 //------------------------------------------------------------------------------------------
             }
