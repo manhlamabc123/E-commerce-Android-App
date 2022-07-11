@@ -21,11 +21,16 @@ import com.example.oopproject.classes_for_controll.CartAdapter;
 import com.example.oopproject.interfaces.ItemClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+
+import io.paperdb.Paper;
 
 public class CartActivity extends AppCompatActivity implements ItemClickListener {
 
@@ -72,35 +77,67 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
 
     @Override
     public void onClick(View view, int position, boolean isLongClick) {
-        CharSequence options[] = new CharSequence[]{"Edit", "Remove"};
+        CharSequence options[] = new CharSequence[]{"Remove"};
         AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-        builder.setTitle("Cart Option");
+        builder.setTitle("Remove from Cart?");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i == 0) {
-                    Intent intent = new Intent(CartActivity.this, ProductDetailsActivity.class);
-                    intent.putExtra("productID", Prevalent.currentCustomer.getCart().get(position).getId());
-                    startActivity(intent);
-                }
-                if (i == 1) {
-                    Prevalent.currentCustomer.removeItemFromCart(position);
-                    FirebaseDatabase.getInstance().getReference().child("Customer")
-                            .child(Prevalent.currentCustomer.getPhone())
-                            .updateChildren(Prevalent.currentCustomer.toMap())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        finish();
-                                        startActivity(getIntent());
-                                        Toast.makeText(CartActivity.this, "Removed Successfully", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                    readProduct(position, new FirebaseCallback() {
+                        @Override
+                        public void onCallback() {
+                            Prevalent.currentCustomer.removeItemFromCart(position);
+                            FirebaseDatabase.getInstance().getReference().child("Customer")
+                                    .child(Prevalent.currentCustomer.getPhone())
+                                    .updateChildren(Prevalent.currentCustomer.toMap())
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                finish();
+                                                startActivity(getIntent());
+                                                Toast.makeText(CartActivity.this, "Removed Successfully", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        }
+                    });
                 }
             }
         });
         builder.show();
+    }
+
+    private void readProduct (int position, FirebaseCallback firebaseCallback) {
+        FirebaseDatabase.getInstance().getReference().child("Product").
+                child(Prevalent.currentCustomer.getCart().get(position).getId()).
+                addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            Product product = snapshot.getValue(Product.class);
+                            Product currentProduct = Prevalent.currentCustomer.getCart().get(position);
+                            String productColor = currentProduct.getDetails().get(0).getColor();
+                            double productCurrentQuantity = product.getQuantityByColor(productColor);
+                            double cartProductQuantity = currentProduct.getQuantityByColor(productColor);
+                            product.setQuantity(productColor, productCurrentQuantity + cartProductQuantity);
+
+                            FirebaseDatabase.getInstance().getReference().child("Product").
+                                    child(Prevalent.currentCustomer.getCart().get(position).getId()).
+                                    updateChildren(product.toMap());
+                            firebaseCallback.onCallback();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private interface FirebaseCallback {
+        void onCallback();
     }
 }

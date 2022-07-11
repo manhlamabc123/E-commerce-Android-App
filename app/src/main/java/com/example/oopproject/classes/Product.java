@@ -96,4 +96,13 @@ public class Product {
 
         return result;
     }
+
+    public double getQuantityByColor(String color) {
+        for (int i = 0; i < this.getDetails().size(); i++) {
+            if (this.getDetails().get(i).getColor().equals(color)) {
+                return this.getDetails().get(i).getQuantity();
+            }
+        }
+        return 0;
+    }
 }
