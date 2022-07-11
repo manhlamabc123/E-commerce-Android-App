@@ -75,18 +75,22 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
         //------------------------------------------------------------------------------
     }
 
+    //------------------------------Cart's item on Click------------------------------
     @Override
     public void onClick(View view, int position, boolean isLongClick) {
+        //Dialog Options
         CharSequence options[] = new CharSequence[]{"Remove"};
         AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
         builder.setTitle("Remove from Cart?");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                //------------------------------if Remove is pressed------------------------------
                 if (i == 0) {
-                    readProduct(position, new FirebaseCallback() {
+                    updateProductQuantity(position, new FirebaseCallback() {
                         @Override
                         public void onCallback() {
+                            //------------------------------On Server: Update User's Cart------------------------------
                             Prevalent.currentCustomer.removeItemFromCart(position);
                             FirebaseDatabase.getInstance().getReference().child("Customer")
                                     .child(Prevalent.currentCustomer.getPhone())
@@ -101,32 +105,44 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
                                             }
                                         }
                                     });
+                            //------------------------------------------------------------------------------------------
                         }
                     });
                 }
+                //------------------------------------------------------------------------------------------
             }
         });
         builder.show();
+        //------------------------------------------------------------------------------------------
     }
+    //------------------------------------------------------------------------------------------
 
-    private void readProduct (int position, FirebaseCallback firebaseCallback) {
+    private void updateProductQuantity (int position, FirebaseCallback firebaseCallback) {
+        //------------------------------On Server: Retrieve Product Data------------------------------
         FirebaseDatabase.getInstance().getReference().child("Product").
                 child(Prevalent.currentCustomer.getCart().get(position).getId()).
                 addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
+                            //------------------------------Local: Update Product Data------------------------------
                             Product product = snapshot.getValue(Product.class);
                             Product currentProduct = Prevalent.currentCustomer.getCart().get(position);
                             String productColor = currentProduct.getDetails().get(0).getColor();
                             double productCurrentQuantity = product.getQuantityByColor(productColor);
                             double cartProductQuantity = currentProduct.getQuantityByColor(productColor);
                             product.setQuantity(productColor, productCurrentQuantity + cartProductQuantity);
+                            //------------------------------------------------------------------------------------------
 
+                            //------------------------------Server: Update Product Data------------------------------
                             FirebaseDatabase.getInstance().getReference().child("Product").
                                     child(Prevalent.currentCustomer.getCart().get(position).getId()).
                                     updateChildren(product.toMap());
+                            //------------------------------------------------------------------------------------------
+
+                            //------------------------------Server: Update User Cart------------------------------
                             firebaseCallback.onCallback();
+                            //------------------------------------------------------------------------------------------
                         }
                     }
 
@@ -135,9 +151,12 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
 
                     }
                 });
+        //------------------------------------------------------------------------------------------------------------------------
     }
 
+    //-----------------------Interface for "Using many Firebase event listener at the same time"------------------------------
     private interface FirebaseCallback {
         void onCallback();
     }
+    //------------------------------------------------------------------------------------------------------------------------
 }
