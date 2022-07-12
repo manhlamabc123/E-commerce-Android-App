@@ -226,7 +226,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     Product product = snapshot.getValue(Product.class);
                     productName.setText(product.getName());
-                    productWarranty.setText(product.getWarranty() + "");
+                    productWarranty.setText((int)product.getWarranty() + "");
                     productCategory.setText(product.getCategory());
                     productDescription.setText(product.getDescription());
                     productInclude.setText(product.getInclude());
@@ -247,8 +247,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 //                            productPrice.setText(product.getDetails().get(i).getPrice() + "");
                             productPrice.setText(product.getPriceInMoneyFormat(i));
-                            productMemory.setText(product.getDetails().get(i).getMemory() + "");
-                            productRAM.setText(product.getDetails().get(i).getRam() + "");
+                            productMemory.setText((int)product.getDetails().get(i).getMemory() + "");
+                            productRAM.setText((int)product.getDetails().get(i).getRam() + "");
                             productQuantity.setText((int)(product.getDetails().get(i).getQuantity()) + "");
                         }
 

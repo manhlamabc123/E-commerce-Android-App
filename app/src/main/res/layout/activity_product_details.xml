@@ -98,7 +98,7 @@
         android:id="@+id/product_warranty_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_ram_details_line">
+        android:layout_below="@id/product_screen_details_line">
 
         <TextView
             android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
         android:id="@+id/product_price_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_warranty_details_line">
+        android:layout_below="@id/product_ram_details_line">
 
         <TextView
             android:layout_width="wrap_content"
