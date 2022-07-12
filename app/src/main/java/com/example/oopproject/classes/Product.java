@@ -1,5 +1,6 @@
 package com.example.oopproject.classes;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -104,5 +105,22 @@ public class Product {
             }
         }
         return 0;
+    }
+
+    public double convertToDouble (String money) {
+        try {
+            NumberFormat formatter = NumberFormat.getCurrencyInstance();
+            Number number = formatter.parse(money);
+            return number.doubleValue();
+        } catch (Exception exception) {
+            System.out.println(exception.toString());
+            return -1;
+        }
+    }
+
+    public String getPriceInMoneyFormat(int position) {
+        double money = this.getDetails().get(position).getPrice();
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return formatter.format(money);
     }
 }

@@ -39,10 +39,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
-        DecimalFormat REAL_FORMATTER = new DecimalFormat("0.###");
-        holder.productQuantity.setText(REAL_FORMATTER.format(cart.get(position).getDetails().get(0).getQuantity()));
+        holder.productQuantity.setText(String.valueOf((int)cart.get(position).getDetails().get(0).getQuantity()));
         holder.productName.setText(cart.get(position).getName());
-        holder.productPrice.setText(REAL_FORMATTER.format(cart.get(position).getDetails().get(0).getPrice()));
+        holder.productPrice.setText(cart.get(position).getPriceInMoneyFormat(0));
         holder.productColor.setText(cart.get(position).getDetails().get(0).getColor());
     }
 

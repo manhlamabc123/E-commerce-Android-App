@@ -128,14 +128,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 //------------------------------------------------------------------------------------------
 
                 //-------------------Create Cart and Add the current Product to it-------------------
+                Product product = new Product();
                 Details details = new Details(Double.parseDouble(productRAM.getText().toString()),
                         Double.parseDouble(productMemory.getText().toString()),
-                        Double.parseDouble(productPrice.getText().toString()),
+                        product.convertToDouble(productPrice.getText().toString()),
                         productColor.getSelectedItem().toString(),
                         Double.parseDouble(textCounter.getText().toString()));
                 ArrayList<Details> detailsArrayList = new ArrayList<>();
                 detailsArrayList.add(details);
-                Product product = new Product(productID,
+                product = new Product(productID,
                         productName.getText().toString(),
                         productCategory.getText().toString(),
                         productManufacturer.getText().toString(),
@@ -244,7 +245,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            productPrice.setText(product.getDetails().get(i).getPrice() + "");
+//                            productPrice.setText(product.getDetails().get(i).getPrice() + "");
+                            productPrice.setText(product.getPriceInMoneyFormat(i));
                             productMemory.setText(product.getDetails().get(i).getMemory() + "");
                             productRAM.setText(product.getDetails().get(i).getRam() + "");
                             productQuantity.setText((int)(product.getDetails().get(i).getQuantity()) + "");
