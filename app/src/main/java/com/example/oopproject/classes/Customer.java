@@ -1,6 +1,7 @@
 package com.example.oopproject.classes;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -76,8 +77,8 @@ public class Customer extends Person{
         for (int i = 0; i < this.getCart().size(); i++) {
             totalPrice += this.getCart().get(i).getDetails().get(0).getPrice() * this.getCart().get(i).getDetails().get(0).getQuantity();
         }
-        DecimalFormat REAL_FORMATTER = new DecimalFormat("0.###");
-        return REAL_FORMATTER.format(totalPrice);
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return formatter.format(totalPrice);
     }
 
     public void removeItemFromCart(int position) {
