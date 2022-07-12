@@ -44,6 +44,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
         //---------------------Payment Total Price---------------------
         paymentTotalPrice.setText(Prevalent.currentCustomer.getTotalPriceOfCart());
+        paymentName.setText(Prevalent.currentCustomer.getName());
+        paymentPhoneNumber.setText(Prevalent.currentCustomer.getPhone());
         //---------------------------------------------------------------
     }
 }
