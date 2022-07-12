@@ -1,8 +1,36 @@
 package com.example.oopproject.classes;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Address {
-    private String id;
     private String province;
     private String district;
     private String wards;
+
+    public Address(String province, String district, String wards) {
+        this.province = province;
+        this.district = district;
+        this.wards = wards;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public String getWards() {
+        return wards;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("province", this.getProvince());
+        result.put("district", this.getDistrict());
+        result.put("wards", this.getWards());
+        return result;
+    }
 }
