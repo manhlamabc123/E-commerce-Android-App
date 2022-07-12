@@ -2,6 +2,5 @@
 <resources>
     <string-array name="payment_methods">
         <item>Tại địa điểm nhận hàng</item>
-        <item>Credit Card</item>
     </string-array>
 </resources>
