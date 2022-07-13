@@ -84,4 +84,8 @@ public class Customer extends Person{
     public void removeItemFromCart(int position) {
         this.getCart().remove(position);
     }
+
+    public void removeAllProducts() {
+        this.getCart().removeAll(this.getCart());
+    }
 }

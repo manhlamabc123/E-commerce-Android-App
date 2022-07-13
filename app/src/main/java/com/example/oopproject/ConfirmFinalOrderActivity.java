@@ -91,14 +91,22 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                 Prevalent.currentCustomer.getCart());
                         System.out.println(order.getId());
                         FirebaseDatabase.getInstance().getReference().child("Order").child(orderID).
-                                updateChildren(order.toMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(ConfirmFinalOrderActivity.this, "Confirmed", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                updateChildren(order.toMap());
                     }
                 });
+                //
+
+                //On Server: Delete Cart
+                Prevalent.getCurrentCustomer().removeAllProducts();
+                FirebaseDatabase.getInstance().getReference().child("Customer").
+                        child(Prevalent.getCurrentCustomer().getPhone()).
+                        updateChildren(Prevalent.getCurrentCustomer().toMap()).
+                        addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(ConfirmFinalOrderActivity.this, "Confirmed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 //
 
                 //To Home

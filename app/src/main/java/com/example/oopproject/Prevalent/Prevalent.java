@@ -8,4 +8,7 @@ public class Prevalent {
     public static final String UserphoneKey = "UserPhone";
     public static final String UserPasswordKey = "UserPassword";
 
+    public static Customer getCurrentCustomer() {
+        return currentCustomer;
+    }
 }
