@@ -2,7 +2,6 @@ package com.example.oopproject.classes;
 
 public abstract class Person {
 
-
     private String phone;
     private String name;
     private String Password;
