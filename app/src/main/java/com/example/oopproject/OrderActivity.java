@@ -27,7 +27,6 @@ public class OrderActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter adapter;
     private DatabaseReference orderReference;
 
     @Override
