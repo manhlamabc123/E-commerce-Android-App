@@ -114,6 +114,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                         if (snapshot.exists()) {
                                             Customer customer = snapshot.getValue(Customer.class);
                                             customer.removeAllProducts();
+                                            Prevalent.setCurrentCustomer(customer);
 
                                             FirebaseDatabase.getInstance().getReference().child("Customer").
                                                     child(customer.getPhone()).
