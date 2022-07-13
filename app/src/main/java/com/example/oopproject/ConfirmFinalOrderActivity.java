@@ -60,9 +60,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         //---------------------------------------------------------------
 
         //---------------------Info to UI---------------------
-        paymentTotalPrice.setText(Prevalent.currentCustomer.getTotalPriceOfCart());
-        paymentName.setText(Prevalent.currentCustomer.getName());
-        paymentPhoneNumber.setText(Prevalent.currentCustomer.getPhone());
+        paymentTotalPrice.setText(Prevalent.getCurrentCustomer().getTotalPriceOfCart());
+        paymentName.setText(Prevalent.getCurrentCustomer().getName());
+        paymentPhoneNumber.setText(Prevalent.getCurrentCustomer().getPhone());
         //---------------------------------------------------------------
 
         //---------------------Confirm Button---------------------
@@ -85,10 +85,10 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                         Date today = new Date();
                         Address address = new Address("A", "B", "C");
                         Order order = new Order(orderID,
-                                Prevalent.currentCustomer.getPhone(),
+                                Prevalent.getCurrentCustomer().getPhone(),
                                 today,
                                 address,
-                                Prevalent.currentCustomer.getCart());
+                                Prevalent.getCurrentCustomer().getCart());
                         System.out.println(order.getId());
                         FirebaseDatabase.getInstance().getReference().child("Order").child(orderID).
                                 updateChildren(order.toMap());

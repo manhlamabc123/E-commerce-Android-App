@@ -55,13 +55,13 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
         //--------------------------Recycler View--------------------------
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new CartAdapter(this, Prevalent.currentCustomer.getCart(), CartActivity.this);
+        adapter = new CartAdapter(this, Prevalent.getCurrentCustomer().getCart(), CartActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         //------------------------------------------------------------------------------
 
         //--------------------------Total Price Text--------------------------
-        textTotalAmount.setText(Prevalent.currentCustomer.getTotalPriceOfCart());
+        textTotalAmount.setText(Prevalent.getCurrentCustomer().getTotalPriceOfCart());
         //------------------------------------------------------------------------------
 
         //------------------------------Next Button--------------------------
@@ -91,10 +91,10 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
                         @Override
                         public void onCallback() {
                             //------------------------------On Server: Update User's Cart------------------------------
-                            Prevalent.currentCustomer.removeItemFromCart(position);
+                            Prevalent.getCurrentCustomer().removeItemFromCart(position);
                             FirebaseDatabase.getInstance().getReference().child("Customer")
-                                    .child(Prevalent.currentCustomer.getPhone())
-                                    .updateChildren(Prevalent.currentCustomer.toMap())
+                                    .child(Prevalent.getCurrentCustomer().getPhone())
+                                    .updateChildren(Prevalent.getCurrentCustomer().toMap())
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -120,14 +120,14 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
     private void updateProductQuantity (int position, FirebaseCallback firebaseCallback) {
         //------------------------------On Server: Retrieve Product Data------------------------------
         FirebaseDatabase.getInstance().getReference().child("Product").
-                child(Prevalent.currentCustomer.getCart().get(position).getId()).
+                child(Prevalent.getCurrentCustomer().getCart().get(position).getId()).
                 addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             //------------------------------Local: Update Product Data------------------------------
                             Product product = snapshot.getValue(Product.class);
-                            Product currentProduct = Prevalent.currentCustomer.getCart().get(position);
+                            Product currentProduct = Prevalent.getCurrentCustomer().getCart().get(position);
                             String productColor = currentProduct.getDetails().get(0).getColor();
                             double productCurrentQuantity = product.getQuantityByColor(productColor);
                             double cartProductQuantity = currentProduct.getQuantityByColor(productColor);
@@ -136,7 +136,7 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
 
                             //------------------------------Server: Update Product Data------------------------------
                             FirebaseDatabase.getInstance().getReference().child("Product").
-                                    child(Prevalent.currentCustomer.getCart().get(position).getId()).
+                                    child(Prevalent.getCurrentCustomer().getCart().get(position).getId()).
                                     updateChildren(product.toMap());
                             //------------------------------------------------------------------------------------------
 

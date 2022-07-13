@@ -11,4 +11,8 @@ public class Prevalent {
     public static Customer getCurrentCustomer() {
         return currentCustomer;
     }
+
+    public static void setCurrentCustomer(Customer currentCustomer) {
+        Prevalent.currentCustomer = currentCustomer;
+    }
 }

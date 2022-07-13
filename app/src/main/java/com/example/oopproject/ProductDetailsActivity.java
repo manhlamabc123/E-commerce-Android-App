@@ -146,7 +146,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         productDescription.getText().toString(),
                         Double.parseDouble(productWarranty.getText().toString()),
                         detailsArrayList);
-                Prevalent.currentCustomer.addProductToCart(product);
+                Prevalent.getCurrentCustomer().addProductToCart(product);
                 //------------------------------------------------------------------------------------------
 
                 //-------------------Update Product's Quantity-------------------
@@ -172,14 +172,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                                 //-------------------On Server: Update Customer's Cart-------------------
                                 DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference().child("Customer");
-                                Query query = customerReference.orderByChild("phone").equalTo(Prevalent.currentCustomer.getPhone());
+                                Query query = customerReference.orderByChild("phone").equalTo(Prevalent.getCurrentCustomer().getPhone());
                                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.child(Prevalent.currentCustomer.getPhone()).exists()) {
-                                            Map<String, Object> userdataMap = Prevalent.currentCustomer.toMap();
+                                        if (snapshot.child(Prevalent.getCurrentCustomer().getPhone()).exists()) {
+                                            Map<String, Object> userdataMap = Prevalent.getCurrentCustomer().toMap();
 
-                                            FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.currentCustomer.getPhone()).updateChildren(userdataMap)
+                                            FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhone()).updateChildren(userdataMap)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
