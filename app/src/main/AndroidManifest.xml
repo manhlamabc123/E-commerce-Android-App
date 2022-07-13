@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OOPProject">
         <activity
-            android:name=".OderDetailsActivity"
+            android:name=".OrderDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".OrderActivity"

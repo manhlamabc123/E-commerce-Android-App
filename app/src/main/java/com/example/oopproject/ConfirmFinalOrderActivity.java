@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.oopproject.Prevalent.Prevalent;
 import com.example.oopproject.classes.Address;
+import com.example.oopproject.classes.Customer;
 import com.example.oopproject.classes.Order;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
@@ -33,6 +36,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private Spinner paymentProvide;
     private Spinner paymentDistrict;
     private Spinner paymentWard;
+    private EditText paymentAddressDetail;
     private Spinner paymentMethod;
     private TextView paymentTotalPrice;
     private Button confirmButton;
@@ -51,6 +55,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         paymentMethodSpinner = (Spinner) findViewById(R.id.payment_method_spinner);
         paymentTotalPrice = (TextView) findViewById(R.id.payment_total_price_text);
         confirmButton = (Button) findViewById(R.id.confirm_payment_btn);
+        paymentAddressDetail = (EditText) findViewById(R.id.payment_address_details);
         //---------------------------------------------------------------
 
         //---------------------Payment Method Spinner---------------------
@@ -69,7 +74,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Create Order
+                //---------------------------Create Order---------------------------
                 getChildCount(new FirebaseCallback() {
                     @Override
                     public void onCallback(int childCount) {
@@ -79,11 +84,18 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                         else if (childCount <= 99) orderID = "GD0" + childCount;
                         else if (childCount <= 999) orderID = "GD" + childCount;
                         else {
-                            System.out.println("Error");
+                            Toast.makeText(ConfirmFinalOrderActivity.this, "You have order too much", Toast.LENGTH_SHORT).show();
                             return;
                         }
+
                         Date today = new Date();
-                        Address address = new Address("A", "B", "C");
+
+                        if (paymentAddressDetail.getText().toString().matches("")) {
+                            Toast.makeText(ConfirmFinalOrderActivity.this, "Please enter your address.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Address address = new Address(paymentAddressDetail.getText().toString().trim(), "A", "B", "C");
+
                         Order order = new Order(orderID,
                                 Prevalent.getCurrentCustomer().getPhone(),
                                 today,
@@ -92,27 +104,42 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                         System.out.println(order.getId());
                         FirebaseDatabase.getInstance().getReference().child("Order").child(orderID).
                                 updateChildren(order.toMap());
+
+                        //---------------------------On Server: Delete Cart---------------------------
+                        FirebaseDatabase.getInstance().getReference().child("Customer").
+                                child(Prevalent.getCurrentCustomer().getPhone()).
+                                addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+                                            Customer customer = snapshot.getValue(Customer.class);
+                                            customer.removeAllProducts();
+
+                                            FirebaseDatabase.getInstance().getReference().child("Customer").
+                                                    child(customer.getPhone()).
+                                                    updateChildren(customer.toMap()).
+                                                    addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            Toast.makeText(ConfirmFinalOrderActivity.this, "Your Order had been confirmed", Toast.LENGTH_LONG).show();
+                                                            //---------------------------To Home---------------------------
+                                                            Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
+                                                            startActivity(intent);
+                                                            //---------------------------------------------------------------
+                                                        }
+                                                    });
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                        //---------------------------------------------------------------
                     }
                 });
-                //
-
-                //On Server: Delete Cart
-                Prevalent.getCurrentCustomer().removeAllProducts();
-                FirebaseDatabase.getInstance().getReference().child("Customer").
-                        child(Prevalent.getCurrentCustomer().getPhone()).
-                        updateChildren(Prevalent.getCurrentCustomer().toMap()).
-                        addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(ConfirmFinalOrderActivity.this, "Confirmed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                //
-
-                //To Home
-                Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
-                startActivity(intent);
-                //
+                //---------------------------------------------------------------------------------
             }
         });
         //---------------------------------------------------------------

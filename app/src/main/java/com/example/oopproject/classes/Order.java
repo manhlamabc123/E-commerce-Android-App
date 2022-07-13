@@ -7,6 +7,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -60,5 +62,19 @@ public class Order {
         result.put("products", this.getProducts());
 
         return result;
+    }
+
+    public String getPrice() {
+        double totalPrice = 0;
+        for (int i = 0; i < this.getProducts().size(); i++) {
+            totalPrice += this.getProducts().get(i).getDetails().get(0).getPrice() * this.getProducts().get(i).getDetails().get(0).getQuantity();
+        }
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return formatter.format(totalPrice);
+    }
+
+    public String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return formatter.format(this.getBuyDate());
     }
 }

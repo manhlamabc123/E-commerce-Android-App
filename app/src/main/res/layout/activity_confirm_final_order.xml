@@ -94,10 +94,35 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:id="@+id/payment_province_line"
+        android:id="@+id/payment_address_details_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/payment_address_text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Details:"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginRight="5dp"/>
+
+        <EditText
+            android:id="@+id/payment_address_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="your Address" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/payment_province_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/payment_address_details_line"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp">
