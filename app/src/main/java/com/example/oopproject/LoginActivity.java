@@ -13,7 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.oopproject.Prevalent.Prevalent;
+import com.example.oopproject.classes_for_controll.Prevalent;
 import com.example.oopproject.classes.Customer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

@@ -12,15 +12,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.oopproject.Prevalent.Prevalent;
+import com.example.oopproject.classes_for_controll.Prevalent;
 import com.example.oopproject.classes.Customer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import io.paperdb.Paper;
 

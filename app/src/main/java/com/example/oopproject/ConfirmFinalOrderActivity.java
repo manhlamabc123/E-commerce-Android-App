@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.oopproject.Prevalent.Prevalent;
+import com.example.oopproject.classes_for_controll.Prevalent;
 import com.example.oopproject.classes.Address;
 import com.example.oopproject.classes.Customer;
 import com.example.oopproject.classes.Order;
@@ -25,7 +24,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {

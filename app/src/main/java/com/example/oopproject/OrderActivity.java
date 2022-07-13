@@ -11,13 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.oopproject.Prevalent.Prevalent;
+import com.example.oopproject.classes_for_controll.Prevalent;
 import com.example.oopproject.classes.Order;
-import com.example.oopproject.classes.Product;
-import com.example.oopproject.classes_for_controll.CartAdapter;
 import com.example.oopproject.classes_for_controll.OrderViewHolder;
-import com.example.oopproject.classes_for_controll.ProductViewHolder;
-import com.example.oopproject.interfaces.ItemClickListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
