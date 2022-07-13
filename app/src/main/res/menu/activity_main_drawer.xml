@@ -25,6 +25,11 @@
             android:title="Profile Settings"
             android:iconTint="@android:color/white"/>
         <item
+            android:id="@+id/nav_employee"
+            android:icon="@drawable/ic_baseline_person_search_24"
+            android:title="Employee"
+            android:iconTint="@android:color/white"/>
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
             android:title="Exit and Logout"
