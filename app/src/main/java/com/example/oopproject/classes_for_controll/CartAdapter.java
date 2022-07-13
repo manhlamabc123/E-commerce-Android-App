@@ -13,9 +13,6 @@ import com.example.oopproject.R;
 import com.example.oopproject.classes.Product;
 import com.example.oopproject.interfaces.ItemClickListener;
 
-import org.w3c.dom.Text;
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {

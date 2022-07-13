@@ -55,13 +55,13 @@ public class OrderActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull OrderViewHolder holder, int position, @NonNull Order model) {
 
-//                        ------------------------------Retrieve Info from Database------------------------------
+                        //------------------------------Retrieve Info from Database------------------------------
                         holder.orderDate.setText(model.getDate());
                         holder.orderAddress.setText(model.getAddress().getAddress());
                         holder.orderPrice.setText(model.getPrice());
-//                        ------------------------------------------------------------------------------------------
+                        //------------------------------------------------------------------------------------------
 
-//                        ------------------------------to Product Details Activity------------------------------
+                        //------------------------------to Product Details Activity------------------------------
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -70,7 +70,7 @@ public class OrderActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
-//                        ------------------------------------------------------------------------------------------
+                        //------------------------------------------------------------------------------------------
                     }
 
                     @NonNull

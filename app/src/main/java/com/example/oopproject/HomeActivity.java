@@ -85,11 +85,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
 
-//                        ------------------------------Retrieve Info from Database------------------------------
+                                    //------------------------------Retrieve Info from Database------------------------------
                                     holder.textProductName.setText(model.getName());
-//                        Picasso.get().load(model.getImage()).into(holder.imageView);
-//                        ------------------------------------------------------------------------------------------
-//                        ------------------------------to Product Details Activity------------------------------
+                                    //------------------------------------------------------------------------------------------
+
+                                    //------------------------------to Product Details Activity------------------------------
                                     holder.itemView.setOnClickListener(new OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                             startActivity(intent);
                                         }
                                     });
-//                        ------------------------------------------------------------------------------------------
+                                    //--------------------------------------------------------------------------------
                                 }
 
                                 @NonNull
@@ -117,6 +117,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         //-----------------------------------------------------------------
+
         //-------------------------Floating Forward Button-------------------------
         FloatingActionButton fabBackward = (FloatingActionButton) findViewById(R.id.fab_backward);
         fabBackward.setOnClickListener(new OnClickListener() {
@@ -136,11 +137,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
 
-//                        ------------------------------Retrieve Info from Database------------------------------
+                                    //------------------------------Retrieve Info from Database------------------------------
                                     holder.textProductName.setText(model.getName());
-//                        Picasso.get().load(model.getImage()).into(holder.imageView);
-//                        ------------------------------------------------------------------------------------------
-//                        ------------------------------to Product Details Activity------------------------------
+                                    //------------------------------------------------------------------------------------------
+
+                                    //------------------------------to Product Details Activity------------------------------
                                     holder.itemView.setOnClickListener(new OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
@@ -149,7 +150,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                             startActivity(intent);
                                         }
                                     });
-//                        ------------------------------------------------------------------------------------------
+                                    //--------------------------------------------------------------------------------
                                 }
 
                                 @NonNull
@@ -168,24 +169,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         //-----------------------------------------------------------------
+
         //-------------------------Drawer Layout-------------------------
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         //-----------------------------------------------------------------
+
         //-------------------------Navigation View-------------------------
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //-----------------------------------------------------------------
+
         //-------------------------User Setting-------------------------
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
         if (Prevalent.getCurrentCustomer() != null) userNameTextView.setText(Prevalent.getCurrentCustomer().getName());
-//        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
         //-----------------------------------------------------------------
+
         //-------------------------Show Products on screen-------------------------
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
@@ -209,11 +213,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
 
-//                        ------------------------------Retrieve Info from Database------------------------------
+                        //------------------------------Retrieve Info from Database------------------------------
                         holder.textProductName.setText(model.getName());
-//                        Picasso.get().load(model.getImage()).into(holder.imageView);
-//                        ------------------------------------------------------------------------------------------
-//                        ------------------------------to Product Details Activity------------------------------
+                        //------------------------------------------------------------------------------------------
+
+                        //------------------------------to Product Details Activity------------------------------
                         holder.itemView.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -222,7 +226,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 startActivity(intent);
                             }
                         });
-//                        ------------------------------------------------------------------------------------------
+                        //------------------------------------------------------------------------------------------
                     }
 
                     @NonNull

@@ -56,14 +56,14 @@ public class OrderDetailsActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull OrderProductViewHolder holder, int position, @NonNull Product model) {
 
-//                        ------------------------------Retrieve Info from Database------------------------------
+                        //------------------------------Retrieve Info from Database------------------------------
                         holder.orderProductName.setText(model.getName());
                         holder.orderProductColor.setText(model.getDetails().get(0).getColor());
                         holder.orderProductPrice.setText(model.getPriceInMoneyFormat(0));
                         holder.orderProductQuantity.setText(String.valueOf((int)model.getDetails().get(0).getQuantity()));
-//                        ------------------------------------------------------------------------------------------
+                        //------------------------------------------------------------------------------------------
 
-//                        ------------------------------to Product Details Activity------------------------------
+                        //------------------------------to Product Details Activity------------------------------
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -72,7 +72,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
-//                        ------------------------------------------------------------------------------------------
+                        //------------------------------------------------------------------------------------------
                     }
 
                     @NonNull

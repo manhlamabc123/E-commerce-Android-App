@@ -22,8 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import io.paperdb.Paper;
 
-//import com.google.firebase.database.DatabaseReference;
-
 public class MainActivity extends AppCompatActivity {
     private Button joinNowButton, loginButton;
     private TextView skipLoginText;

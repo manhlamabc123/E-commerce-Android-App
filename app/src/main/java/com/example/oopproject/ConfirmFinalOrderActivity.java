@@ -35,7 +35,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private Spinner paymentDistrict;
     private Spinner paymentWard;
     private EditText paymentAddressDetail;
-    private Spinner paymentMethod;
     private TextView paymentTotalPrice;
     private Button confirmButton;
 
