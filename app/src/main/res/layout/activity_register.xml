@@ -74,7 +74,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="6dp"
         android:layout_marginRight="15dp"
-        android:padding="20dp" />
+        android:background="@drawable/input_design"
+        />
 
     <Spinner
         android:id="@+id/spinner_district"
@@ -84,25 +85,43 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="6dp"
         android:layout_marginRight="15dp"
-        android:padding="20dp" />
+        android:background="@drawable/input_design"
+        />
+
 
     <Spinner
         android:id="@+id/spinner_commune"
         android:layout_width="380dp"
         android:layout_height="60dp"
         android:layout_below="@id/spinner_district"
-
+        android:background="@drawable/input_design"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="6dp"
         android:layout_marginRight="15dp"
-        android:padding="20dp" />
+        />
 
+    <EditText
+        android:id="@+id/register_detail_address_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner_commune"
+        android:background="@drawable/input_design"
+        android:padding="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="Detail Address"
+        android:inputType="text"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textSize="19sp"
+        android:layout_marginTop="6dp"
+        />
 
     <Button
         android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_commune"
+        android:layout_below="@+id/register_detail_address_input"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="15dp"
