@@ -31,10 +31,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rlll"
-        app:queryHint="Employee's Name"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/input_design"
-        android:layout_margin="5dp"
-        android:layoutDirection="rtl"/>
+        android:layoutDirection="rtl"
+        app:queryHint="Employee's Name" />
 
     <Spinner
         android:id="@+id/employee_job_filter"
@@ -44,6 +47,7 @@
         android:background="@drawable/input_design"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
         android:textAlignment="textEnd"/>
 
     <androidx.recyclerview.widget.RecyclerView

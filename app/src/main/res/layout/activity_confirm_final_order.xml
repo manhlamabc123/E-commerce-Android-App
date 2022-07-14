@@ -138,7 +138,7 @@
             android:layout_marginRight="5dp"/>
 
         <Spinner
-            android:id="@+id/payment_province_spinner"
+            android:id="@+id/spinner_province"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignBaseline="@id/payment_method_text"
@@ -166,7 +166,7 @@
             android:layout_marginRight="5dp"/>
 
         <Spinner
-            android:id="@+id/payment_district_spinner"
+            android:id="@+id/spinner_district"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignBaseline="@id/payment_method_text"
@@ -194,7 +194,7 @@
             android:layout_marginRight="5dp"/>
 
         <Spinner
-            android:id="@+id/payment_commune_spinner"
+            android:id="@+id/spinner_commune"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignBaseline="@id/payment_method_text"
