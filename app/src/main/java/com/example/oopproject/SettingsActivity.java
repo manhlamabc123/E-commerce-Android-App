@@ -1,11 +1,8 @@
 package com.example.oopproject;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -18,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.oopproject.classes.Address;
 import com.example.oopproject.classes.Customer;
 import com.example.oopproject.classes_for_controll.Prevalent;
+import com.example.oopproject.classes_for_controll.SelectAddress;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -25,28 +23,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
-//import com.theartofdev.edmodo.cropper.CropImage;
 
-import java.util.HashMap;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity
 {
-    private CircleImageView profileImageView;
     private EditText fullNameEditText, detailAddressEditText, passwordEditText, confirmPasswordEditText;
-    private TextView profileChangeTextBtn,  closeTextBtn, saveTextButton;
+    private TextView closeTextBtn, saveTextButton;
     private Button securityQuestionButton;
     private String selectedProvince, selectedDistrict, selectedCommune;
     private Spinner provinceSpinner, districtSpinner, communeSpinner;
     SelectAddress selectAddress;
-
-
-    private StorageReference storageProfilePrictureRef;
-    private String checker = "";
 
 
     @Override
@@ -55,9 +42,7 @@ public class SettingsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        profileImageView = (CircleImageView) findViewById(R.id.settings_profile_image);
         fullNameEditText = (EditText) findViewById(R.id.settings_username_input);
-        profileChangeTextBtn = (TextView) findViewById(R.id.profile_image_change_btn);
         closeTextBtn = (TextView) findViewById(R.id.close_settings_btn);
         saveTextButton = (TextView) findViewById(R.id.update_account_settings_btn);
         securityQuestionButton = (Button) findViewById(R.id.security_questions_btn);
