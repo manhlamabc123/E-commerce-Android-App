@@ -8,6 +8,7 @@
         <entry key="..\:/Hedspi HUST/OOP_LAB/OOP-Project-Bao/app/src/main/res/layout/activity_settings.xml" value="0.14130434782608695" />
         <entry key="..\:/Hedspi Hust/OOP_LAB/OOP-Project/app/src/main/res/layout/activity_home.xml" value="0.18541666666666667" />
         <entry key="..\:/Hedspi Hust/OOP_LAB/OOP-Project/app/src/main/res/layout/activity_login.xml" value="0.18541666666666667" />
+        <entry key="..\:/Hedspi Hust/OOP_LAB/OOP-Project/app/src/main/res/layout/activity_main.xml" value="0.19791666666666666" />
         <entry key="..\:/Hedspi Hust/OOP_LAB/OOP-Project/app/src/main/res/layout/activity_register.xml" value="0.18541666666666667" />
         <entry key="..\:/Hedspi Hust/OOP_LAB/OOP-Project/app/src/main/res/layout/activity_reset_password.xml" value="0.19375" />
         <entry key="..\:/Hedspi Hust/OOP_LAB/OOP-Project/app/src/main/res/layout/activity_settings.xml" value="0.18541666666666667" />
@@ -55,7 +56,7 @@
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/drawable/ic_minus.xml" value="0.1" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/drawable/ic_plus.xml" value="0.1835" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_cart.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_confirm_final_order.xml" value="0.1722488038277512" />
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_confirm_final_order.xml" value="0.275" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_coupon.xml" value="0.275" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_home.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/activity_login.xml" value="0.275" />
@@ -72,7 +73,6 @@
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/gender_choices.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/nav_header_home.xml" value="0.13551165146909827" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/products_items_layout.xml" value="0.264" />
-        <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/spinner_layout.xml" value="0.275" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/menu/activity_main_drawer.xml" value="0.24353741496598638" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/menu/home.xml" value="0.16574074074074074" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/menu/main_menu.xml" value="0.16574074074074074" />
