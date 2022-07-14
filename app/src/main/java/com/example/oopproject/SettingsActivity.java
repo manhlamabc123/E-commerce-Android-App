@@ -149,6 +149,7 @@ public class SettingsActivity extends AppCompatActivity
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(SettingsActivity.this, "Data updated succesfully", Toast.LENGTH_SHORT).show();
+                            Prevalent.setCurrentCustomer(newCustomer);
                             Intent intent = new Intent(SettingsActivity.this, HomeActivity.class);
                             startActivity(intent);
                         }
