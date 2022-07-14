@@ -58,6 +58,7 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
         //------------------------------------------------------------------------------
 
         //------------------------------Next Button--------------------------
+        if (Prevalent.getCurrentCustomer().getCart().isEmpty()) nextProcessBtn.setEnabled(false);
         nextProcessBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

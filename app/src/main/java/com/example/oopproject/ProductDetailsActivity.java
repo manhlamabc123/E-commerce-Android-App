@@ -116,7 +116,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //-------------------Loading Bar-------------------
-                loadingBar.setTitle("Please wait!!!");
+                loadingBar.setTitle("Please wait");
                 loadingBar.setMessage("Adding to cart...");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
@@ -167,14 +167,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                                 //-------------------On Server: Update Customer's Cart-------------------
                                 DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference().child("Customer");
-                                Query query = customerReference.orderByChild("phone").equalTo(Prevalent.getCurrentCustomer().getPhoneNumber());
+                                Query query = customerReference.orderByChild("phoneNumber").equalTo(Prevalent.getCurrentCustomer().getPhoneNumber());
                                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if (snapshot.child(Prevalent.getCurrentCustomer().getPhoneNumber()).exists()) {
-                                            Map<String, Object> userdataMap = Prevalent.getCurrentCustomer().toMap();
-
-                                            FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhoneNumber()).updateChildren(userdataMap)
+                                            FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhoneNumber())
+                                                    .updateChildren(Prevalent.getCurrentCustomer().toMap())
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
@@ -240,7 +239,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                            productPrice.setText(product.getDetails().get(i).getPrice() + "");
                             productPrice.setText(product.getPriceInMoneyFormat(i));
                             productMemory.setText((int)product.getDetails().get(i).getMemory() + "");
                             productRAM.setText((int)product.getDetails().get(i).getRam() + "");
