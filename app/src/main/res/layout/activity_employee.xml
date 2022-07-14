@@ -54,6 +54,6 @@
         android:id="@+id/employee_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/employee_job_filter"/>
+        android:layout_below="@+id/employee_job_filter" />
 
 </RelativeLayout>
