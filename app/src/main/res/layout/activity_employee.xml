@@ -32,12 +32,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rlll"
         app:queryHint="Employee's Name"
-        android:background="@android:color/white"/>
+        android:background="@drawable/input_design"/>
+
+    <Spinner
+        android:id="@+id/employee_job_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_bar"
+        android:background="@drawable/input_design"
+        android:textAlignment="textEnd"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/employee_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/search_bar" />
+        android:layout_below="@+id/employee_job_filter"/>
 
 </RelativeLayout>

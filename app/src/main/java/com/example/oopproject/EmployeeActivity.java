@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.oopproject.classes.Employee;
@@ -30,17 +32,33 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ItemClickListener itemClickListener;
+    private Spinner jobFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee);
 
+        //On Server: get Employee List
+        employeeReference = FirebaseDatabase.getInstance().getReference().child("Employee");
+        //
+
+        //Connect to UI
         searchView = (SearchView) findViewById(R.id.search_bar);
         recyclerView = (RecyclerView) findViewById(R.id.employee_list);
+        jobFilter = (Spinner) findViewById(R.id.employee_job_filter);
+        //
+
+        //Recycle View
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        employeeReference = FirebaseDatabase.getInstance().getReference().child("Employee");
+        //
+
+        //Job Filter
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(EmployeeActivity.this, R.array.employee_job_list, R.layout.employee_job_snipper_layout);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        jobFilter.setAdapter(adapter);
+        //
     }
 
     @Override
