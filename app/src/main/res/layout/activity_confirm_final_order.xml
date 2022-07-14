@@ -187,14 +187,14 @@
             android:id="@+id/payment_ward_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ward:"
+            android:text="Commune:"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginRight="5dp"/>
 
         <Spinner
-            android:id="@+id/payment_ward_spinner"
+            android:id="@+id/payment_commune_spinner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignBaseline="@id/payment_method_text"
