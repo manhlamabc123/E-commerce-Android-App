@@ -2406,10 +2406,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     default:
                                         break;
                                 }
-                                communeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     // Specify the layout to use when the list of choices appears
-                                communeSpinner.setAdapter(communeAdapter);        //Populate the list of Districts in respect of the State selected
-
-                                //To obtain the selected District from the spinner
+                                communeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                communeSpinner.setAdapter(communeAdapter);
                                 communeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
