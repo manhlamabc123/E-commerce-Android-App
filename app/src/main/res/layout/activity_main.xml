@@ -16,6 +16,7 @@
         android:layout_marginTop="40dp"
         android:src="@drawable/applogo"
         />
+
     <TextView
         android:id="@+id/app_slogan"
         android:layout_width="248dp"
@@ -24,7 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="80dp"
         android:layout_marginTop="142dp"
-        android:text="Find, Discover, Choose and Buy anything online."
+        android:text="Looking for new phone?\nWe are your best choice!"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
@@ -61,20 +62,5 @@
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/skip_login_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Skip Login"
-        android:textAlignment="viewEnd"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="220dp"
-        android:layout_marginRight="20dp"
-        />
 
 </RelativeLayout>

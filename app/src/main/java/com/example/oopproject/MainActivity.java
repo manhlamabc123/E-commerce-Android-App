@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         joinNowButton = (Button)findViewById((R.id.main_join_now_btn));
         loginButton = (Button)findViewById(R.id.main_login_btn);
-        skipLoginText = (TextView)findViewById(R.id.skip_login_text);
         loadingBar = new ProgressDialog(this);
 
         Paper.init(this);
@@ -50,14 +49,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        skipLoginText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
