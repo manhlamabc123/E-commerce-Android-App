@@ -2433,7 +2433,7 @@ public class RegisterActivity extends AppCompatActivity {
                 selectedProvince = "";
             }
         });
-        //
+        //--------------------------------------------------------------------------------------------
 
         //-----------------------Create Button----------------------------------------------
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
