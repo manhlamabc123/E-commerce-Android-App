@@ -16,6 +16,7 @@ public class SelectAddress {
         provinceAdapter = ArrayAdapter.createFromResource(context, R.array.VietNam_provinces, layout);
         provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provinceSpinner.setAdapter(provinceAdapter);
+        if (Prevalent.getCurrentCustomer() != null) provinceSpinner.setSelection(provinceAdapter.getPosition(Prevalent.getCurrentCustomer().getAddress().getProvince()));
         provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -221,6 +222,7 @@ public class SelectAddress {
                     }
                     districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     districtSpinner.setAdapter(districtAdapter);
+                    if (Prevalent.getCurrentCustomer() != null) districtSpinner.setSelection(districtAdapter.getPosition(Prevalent.getCurrentCustomer().getAddress().getDistrict()));
 
                     districtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
@@ -2366,6 +2368,7 @@ public class SelectAddress {
                                 }
                                 communeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 communeSpinner.setAdapter(communeAdapter);
+                                if (Prevalent.getCurrentCustomer() != null) communeSpinner.setSelection(communeAdapter.getPosition(Prevalent.getCurrentCustomer().getAddress().getCommune()));
                                 communeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

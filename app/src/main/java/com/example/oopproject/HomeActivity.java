@@ -285,6 +285,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_logout:
                 Paper.book().destroy();
+                Prevalent.setCurrentCustomer(null);
                 Intent intent1 = new Intent(HomeActivity.this, MainActivity.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent1);
