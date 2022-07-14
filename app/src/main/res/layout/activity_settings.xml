@@ -103,15 +103,16 @@
         android:layout_marginBottom="15dp" />
 
     <Button
-        android:id="@+id/datePickerButton"
-        android:layout_below="@+id/gender_spinner"
+        android:id="@+id/security_questions_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="JAN 01 2020"
-        android:textSize="17sp"
-        android:textColor="@android:color/black"
-        style="?android:spinnerStyle"
-        android:layout_margin="15dp"/>
-<!--        android:onClick="openDatePicker"/>-->
+
+        android:layout_below="@+id/gender_spinner"
+        android:text="Set Security Questions"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        />
 
 </RelativeLayout>
