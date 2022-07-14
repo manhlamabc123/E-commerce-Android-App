@@ -1,11 +1,15 @@
 package com.example.oopproject;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
@@ -144,6 +148,22 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
 
     @Override
     public void onClick(View view, int position, boolean isLongClick) {
+        CharSequence option[] = new CharSequence[]{"Call"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(EmployeeActivity.this);
+        builder.setTitle("Call?");
+        builder.setItems(option, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (i == 0) {
+                    String employeePhoneNumber =  employeeArrayList.get(position).getPhoneNumber();
+                    String phoneFormat = "tel:" + employeePhoneNumber;
 
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse(phoneFormat));
+                    startActivity(intent);
+                }
+            }
+        });
+        builder.show();
     }
 }
