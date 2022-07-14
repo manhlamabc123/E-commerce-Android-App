@@ -19,12 +19,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     private final ItemClickListener itemClickListener;
     private ArrayList<Product> cart;
-    private Context context;
 
-    public CartAdapter(ItemClickListener itemClickListener, ArrayList<Product> cart, Context context) {
+    public CartAdapter(ItemClickListener itemClickListener, ArrayList<Product> cart) {
         this.itemClickListener = itemClickListener;
         this.cart = cart;
-        this.context = context;
     }
 
     @NonNull

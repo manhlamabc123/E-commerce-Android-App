@@ -52,10 +52,10 @@
         android:id="@+id/settings_profile_image"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:src="@drawable/profile"
         android:layout_below="@+id/app_bar_settings"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"/>
+        android:src="@drawable/profile" />
 
     <TextView
         android:id="@+id/profile_image_change_btn"
@@ -111,7 +111,7 @@
         android:textSize="17sp"
         android:textColor="@android:color/black"
         style="?android:spinnerStyle"
-        android:layout_margin="15dp"
-        android:onClick="openDatePicker"/>
+        android:layout_margin="15dp"/>
+<!--        android:onClick="openDatePicker"/>-->
 
 </RelativeLayout>
