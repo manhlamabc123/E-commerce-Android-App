@@ -58,7 +58,7 @@ public class SearchActivity extends AppCompatActivity
 
         FirebaseRecyclerOptions<Product> options =
                 new FirebaseRecyclerOptions.Builder<Product>()
-                        .setQuery(reference.orderByChild("name").startAt(searchInput), Product.class)
+                        .setQuery(reference.orderByChild("name").startAt(searchInput).endAt(searchInput+"\\uf8ff"), Product.class)
                         .build();
 
         FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter =
