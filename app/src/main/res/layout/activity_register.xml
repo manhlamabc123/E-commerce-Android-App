@@ -68,19 +68,18 @@
 
     <Spinner
         android:id="@+id/spinner_province"
-        android:layout_width="380dp"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/register_password_input"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="6dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
-        />
+        android:background="@drawable/input_design" />
 
     <Spinner
         android:id="@+id/spinner_district"
-        android:layout_width="380dp"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/spinner_province"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="6dp"
@@ -91,8 +90,8 @@
 
     <Spinner
         android:id="@+id/spinner_commune"
-        android:layout_width="380dp"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/spinner_district"
         android:background="@drawable/input_design"
         android:layout_marginLeft="15dp"
