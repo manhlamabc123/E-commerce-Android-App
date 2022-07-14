@@ -1,0 +1,120 @@
+package com.example.oopproject;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.oopproject.classes.Customer;
+import com.example.oopproject.classes_for_controll.Prevalent;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+
+public class ResetPasswordActivity extends AppCompatActivity
+{
+    private String check = "";
+    private TextView pageTitle, titleQuestions;
+    private EditText phoneNumber, question1, question2;
+    private Button verifyButton;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reset_password);
+
+
+        check = getIntent().getStringExtra("check");
+
+        pageTitle = findViewById(R.id.page_title);
+        titleQuestions = findViewById(R.id.title_questions);
+        phoneNumber = findViewById(R.id.find_phone_number);
+        question1 = findViewById(R.id.question_1);
+        question2 = findViewById(R.id.question_2);
+        verifyButton = findViewById(R.id.verify_btn);
+    }
+
+
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        phoneNumber.setVisibility(View.GONE);
+
+        if (check.equals("settings"))
+        {
+            titleQuestions.setText("Set questions");
+            titleQuestions.setText("Please set Answer for the Following Security Questions");
+            verifyButton.setText("Set");
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.currentCustomer.getPhoneNumber());
+
+            ref.child("Security Questions").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String ans1 = snapshot.child("answer1").getValue().toString();
+                        String ans2 = snapshot.child("answer2").getValue().toString();
+
+                        question1.setText(ans1);
+                        question2.setText(ans2);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            verifyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String answer1 = question1.getText().toString().toLowerCase();
+                    String answer2 = question2.getText().toString().toLowerCase();
+
+                    if (answer1.equals("") || answer2.equals("")) {
+                        Toast.makeText(ResetPasswordActivity.this, "Please answer both question", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        HashMap <String, Object> customerDataMap = new HashMap<>();
+                        customerDataMap.put("answer1", answer1);
+                        customerDataMap.put("answer2", answer2);
+
+                        ref.child("Security Questions").updateChildren(customerDataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(ResetPasswordActivity.this, "Security questions setted successfully", Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(ResetPasswordActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        else if (check.equals("login"))
+        {
+            phoneNumber.setVisibility(View.VISIBLE);
+        }
+    }
+}
