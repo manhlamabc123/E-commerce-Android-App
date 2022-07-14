@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -58,6 +59,20 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(EmployeeActivity.this, R.array.employee_job_list, R.layout.employee_job_snipper_layout);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         jobFilter.setAdapter(adapter);
+        jobFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (recyclerView.getAdapter() == null) return;
+                searchView.setQuery("", false);
+                searchView.clearFocus();
+                search("", jobFilter.getSelectedItem().toString(), itemClickListener);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         //
     }
 
@@ -66,6 +81,7 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
         super.onStart();
 
         itemClickListener = this;
+        String job = jobFilter.getSelectedItem().toString();
         if (employeeReference != null) {
             employeeReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -96,18 +112,18 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    search(newText, itemClickListener);
+                    search(newText, job, itemClickListener);
                     return true;
                 }
             });
         }
     }
 
-    private void search(String keyword, ItemClickListener itemClickListener) {
+    private void search(String keyword, String job, ItemClickListener itemClickListener) {
         if (!keyword.equals("")){
             ArrayList<Employee> employeeSearchList = new ArrayList<>();
             for (Employee object : employeeArrayList){
-                if(object.getName().toLowerCase().contains(keyword.toLowerCase())){
+                if(object.getName().toLowerCase().contains(keyword.toLowerCase()) && object.getJob().equals(job)){
                     employeeSearchList.add(object);
                 }
             }
@@ -115,7 +131,13 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
             recyclerView.setAdapter(adapterClass);
         }
         else {
-            EmployeeAdapter adapterClass = new EmployeeAdapter(itemClickListener, employeeArrayList);
+            ArrayList<Employee> employeeSearchList = new ArrayList<>();
+            for (Employee object : employeeArrayList){
+                if(object.getJob().equals(job)){
+                    employeeSearchList.add(object);
+                }
+            }
+            EmployeeAdapter adapterClass = new EmployeeAdapter(itemClickListener, employeeSearchList);
             recyclerView.setAdapter(adapterClass);
         }
     }

@@ -32,7 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rlll"
         app:queryHint="Employee's Name"
-        android:background="@drawable/input_design"/>
+        android:background="@drawable/input_design"
+        android:layout_margin="5dp"
+        android:layoutDirection="rtl"/>
 
     <Spinner
         android:id="@+id/employee_job_filter"
@@ -40,6 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_bar"
         android:background="@drawable/input_design"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:textAlignment="textEnd"/>
 
     <androidx.recyclerview.widget.RecyclerView
