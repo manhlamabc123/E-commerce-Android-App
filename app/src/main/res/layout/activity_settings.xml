@@ -106,6 +106,7 @@
         android:id="@+id/security_questions_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_below="@+id/gender_spinner"
         android:text="Set Security Questions"
         android:background="@color/colorPrimary"
@@ -113,6 +114,5 @@
         android:layout_margin="15dp"
         android:padding="10dp"
         />
-
 
 </RelativeLayout>

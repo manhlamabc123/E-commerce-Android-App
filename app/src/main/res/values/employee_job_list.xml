@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="employee_job_list">
+        <item>Nhan vien ky thuat</item>
+        <item>Nhan vien ban hang</item>
+        <item>Quan ly</item>
+    </string-array>
+</resources>

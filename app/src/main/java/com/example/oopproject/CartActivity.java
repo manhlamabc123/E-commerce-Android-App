@@ -48,7 +48,7 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
         //--------------------------Recycler View--------------------------
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new CartAdapter(this, Prevalent.getCurrentCustomer().getCart(), CartActivity.this);
+        adapter = new CartAdapter(this, Prevalent.getCurrentCustomer().getCart());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         //------------------------------------------------------------------------------

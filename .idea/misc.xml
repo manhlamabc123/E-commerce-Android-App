@@ -67,6 +67,11 @@
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/app_bar_home.xml" value="0.264" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/cart_items_layout.xml" value="0.264" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/content_home.xml" value="0.264" />
+<<<<<<< HEAD
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/employee_job_snipper_layout.xml" value="0.275" />
+        <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/employee_layout.xml" value="0.27395833333333336" />
+=======
+>>>>>>> 90eb1ace748cbfbf03708d779edf3ae36e7b4fd4
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/fragment_gallery.xml" value="0.13551165146909827" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/trand/AndroidStudioProjects/OOP-Project/app/src/main/res/layout/fragment_slideshow.xml" value="0.13551165146909827" />
