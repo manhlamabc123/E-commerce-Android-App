@@ -5,14 +5,21 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.oopproject.classes.Address;
+import com.example.oopproject.classes.Customer;
 import com.example.oopproject.classes_for_controll.Prevalent;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,13 +37,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SettingsActivity extends AppCompatActivity
 {
     private CircleImageView profileImageView;
-    private EditText fullNameEditText, addressEditText;
-    private TextView profileChangeTextBtn,  closeTextBtn, saveTextButton, userPhoneEditText;
+    private EditText fullNameEditText, detailAddressEditText, passwordEditText, confirmPasswordEditText;
+    private TextView profileChangeTextBtn,  closeTextBtn, saveTextButton;
     private Button securityQuestionButton;
+    private String selectedProvince, selectedDistrict, selectedCommune;
+    private Spinner provinceSpinner, districtSpinner, communeSpinner;
+    SelectAddress selectAddress;
 
-    private Uri imageUri;
-    private String myUrl = "";
-    private StorageTask uploadTask;
+
     private StorageReference storageProfilePrictureRef;
     private String checker = "";
 
@@ -47,19 +55,50 @@ public class SettingsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        storageProfilePrictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
-
         profileImageView = (CircleImageView) findViewById(R.id.settings_profile_image);
-        fullNameEditText = (EditText) findViewById(R.id.settings_name);
-        userPhoneEditText = (TextView) findViewById(R.id.settings_phone_number);
-//        addressEditText = (EditText) findViewById(R.id.settings);
+        fullNameEditText = (EditText) findViewById(R.id.settings_username_input);
         profileChangeTextBtn = (TextView) findViewById(R.id.profile_image_change_btn);
         closeTextBtn = (TextView) findViewById(R.id.close_settings_btn);
         saveTextButton = (TextView) findViewById(R.id.update_account_settings_btn);
         securityQuestionButton = (Button) findViewById(R.id.security_questions_btn);
+        provinceSpinner = (Spinner)findViewById(R.id.settings_spinner_province);
+        districtSpinner = (Spinner)findViewById(R.id.settings_spinner_district);
+        communeSpinner = (Spinner)findViewById(R.id.settings_spinner_commune);
+        detailAddressEditText = (EditText)findViewById(R.id.settings_detail_address_input);
+        passwordEditText = (EditText)findViewById(R.id.settings_password_input);
+        confirmPasswordEditText = (EditText)findViewById(R.id.settings_password_input_again);
+
+        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhoneNumber());
+
+        UsersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                if (dataSnapshot.exists())
+                {
+                    String name = dataSnapshot.child("name").getValue().toString();
+                    String password = dataSnapshot.child("password").getValue().toString();
+                    selectedProvince = dataSnapshot.child("address").child("province").getValue().toString();
+                    selectedDistrict = dataSnapshot.child("address").child("district").getValue().toString();
+                    selectedCommune = dataSnapshot.child("address").child("commune").getValue().toString();
+                    String detailAddress = dataSnapshot.child("address").child("detailAddress").getValue().toString();
+
+                    fullNameEditText.setText(name);
+                    passwordEditText.setText(password);
+                    confirmPasswordEditText.setText(password);
+                    detailAddressEditText.setText(detailAddress);
+
+                    selectAddress = new SelectAddress(SettingsActivity.this, provinceSpinner, districtSpinner, communeSpinner, selectedProvince, selectedDistrict, selectedCommune);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
-        userInfoDisplay(profileImageView, fullNameEditText, userPhoneEditText, addressEditText);
 
 
         closeTextBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,20 +123,20 @@ public class SettingsActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                updateOnlyUserInfo();
-            }
-        });
+                String name = fullNameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                String confirmPassword = confirmPasswordEditText.getText().toString();
+                String detailAddress = detailAddressEditText.getText().toString();
 
-
-        profileChangeTextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                checker = "clicked";
-
-//                CropImage.activity(imageUri)
-//                        .setAspectRatio(1, 1)
-//                        .start(SettinsActivity.this);
+                if (name.equals("") || password.equals("") || confirmPassword.equals("") || detailAddress.equals(""))
+                {
+                    Toast.makeText(SettingsActivity.this, "Fill all boxes", Toast.LENGTH_SHORT).show();
+                }
+                else if (!password.equals(confirmPassword)) {
+                    Toast.makeText(SettingsActivity.this, "Confirm password not matching", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    updateOnlyUserInfo();
             }
         });
     }
@@ -106,161 +145,36 @@ public class SettingsActivity extends AppCompatActivity
 
     private void updateOnlyUserInfo()
     {
+        selectedProvince = selectAddress.getSelectedProvince();
+        selectedDistrict = selectAddress.getSelectedDistrict();
+        selectedCommune = selectAddress.getSelectedCommune();
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Customer");
 
-        HashMap<String, Object> userMap = new HashMap<>();
-        userMap. put("name", fullNameEditText.getText().toString());
-//        userMap. put("address", addressEditText.getText().toString());
-        userMap. put("phone", userPhoneEditText.getText().toString());
-        ref.child(Prevalent.getCurrentCustomer().getPhoneNumber()).updateChildren(userMap);
+        Address address = new Address(detailAddressEditText.getText().toString(),
+                selectedProvince,
+                selectedDistrict,
+                selectedCommune);
+        Customer newCustomer = new Customer(Prevalent.getCurrentCustomer().getPhoneNumber(),
+                fullNameEditText.getText().toString(),
+                passwordEditText.getText().toString(), address);
+        ref.child(Prevalent.getCurrentCustomer().getPhoneNumber()).updateChildren(newCustomer.toMap())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(SettingsActivity.this, "Data updated succesfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SettingsActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(SettingsActivity.this, "Network error! Please try again later.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
-        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
-        Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }
 
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null)
-//        {
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//            imageUri = result.getUri();
-//
-//            profileImageView.setImageURI(imageUri);
-//        }
-//        else
-//        {
-//            Toast.makeText(this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
-//
-//            startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
-//            finish();
-//        }
-//    }
-
-
-
-
-    private void userInfoSaved()
-    {
-        if (TextUtils.isEmpty(fullNameEditText.getText().toString()))
-        {
-            Toast.makeText(this, "Name is mandatory.", Toast.LENGTH_SHORT).show();
-        }
-//        else if (TextUtils.isEmpty(addressEditText.getText().toString()))
-//        {
-//            Toast.makeText(this, "Address is mandatory.", Toast.LENGTH_SHORT).show();
-//        }
-        else if (TextUtils.isEmpty(userPhoneEditText.getText().toString()))
-        {
-            Toast.makeText(this, "Phone is mandatory.", Toast.LENGTH_SHORT).show();
-        }
-//        else if(checker.equals("clicked"))
-//        {
-//            uploadImage();
-//        }
-    }
-
-
-
-//    private void uploadImage()
-//    {
-//        final ProgressDialog progressDialog = new ProgressDialog(this);
-//        progressDialog.setTitle("Update Profile");
-//        progressDialog.setMessage("Please wait, while we are updating your account information");
-//        progressDialog.setCanceledOnTouchOutside(false);
-//        progressDialog.show();
-//
-//        if (imageUri != null)
-//        {
-//            final StorageReference fileRef = storageProfilePrictureRef
-//                    .child(Prevalent.getCurrentCustomer().getPhoneNumber() + ".jpg");
-//
-//            uploadTask = fileRef.putFile(imageUri);
-//
-//            uploadTask.continueWithTask(new Continuation() {
-//                @Override
-//                public Object then(@NonNull Task task) throws Exception
-//                {
-//                    if (!task.isSuccessful())
-//                    {
-//                        throw task.getException();
-//                    }
-//
-//                    return fileRef.getDownloadUrl();
-//                }
-//            })
-//                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Uri> task)
-//                        {
-//                            if (task.isSuccessful())
-//                            {
-//                                Uri downloadUrl = task.getResult();
-//                                myUrl = downloadUrl.toString();
-//
-//                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Customer");
-//
-//                                HashMap<String, Object> userMap = new HashMap<>();
-//                                userMap. put("name", fullNameEditText.getText().toString());
-//                                userMap. put("address", addressEditText.getText().toString());
-//                                userMap. put("phoneOrder", userPhoneEditText.getText().toString());
-//                                userMap. put("image", myUrl);
-//                                ref.child(Prevalent.getCurrentCustomer().getPhoneNumber()).updateChildren(userMap);
-//
-//                                progressDialog.dismiss();
-//
-//                                startActivity(new Intent(SettingsActivity.this, MainActivity.class));
-//                                Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
-//                                finish();
-//                            }
-//                            else
-//                            {
-//                                progressDialog.dismiss();
-//                                Toast.makeText(SettingsActivity.this, "Error.", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//        }
-//        else
-//        {
-//            Toast.makeText(this, "image is not selected.", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-
-    private void userInfoDisplay(final CircleImageView profileImageView, final EditText fullNameEditText, final TextView userPhoneEditText, final EditText addressEditText)
-    {
-        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhoneNumber());
-
-        UsersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                if (dataSnapshot.exists())
-                {
-                    if (dataSnapshot.child("phone").exists())
-                    {
-//                        String image = dataSnapshot.child("image").getValue().toString();
-                        String name = dataSnapshot.child("name").getValue().toString();
-                        String phone = dataSnapshot.child("phone").getValue().toString();
-//                        String address = dataSnapshot.child("address").getValue().toString();
-
-//                        Picasso.get().load(image).into(profileImageView);
-                        fullNameEditText.setText(name);
-                        userPhoneEditText.setText(phone);
-//                        addressEditText.setText(address);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 }
