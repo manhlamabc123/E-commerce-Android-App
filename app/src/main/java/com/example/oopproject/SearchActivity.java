@@ -2,30 +2,33 @@ package com.example.oopproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.oopproject.classes.Product;
-import com.example.oopproject.classes_for_controll.ProductViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.example.oopproject.classes_for_controll.ProductAdapter;
+import com.example.oopproject.interfaces.ItemClickListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.rey.material.widget.EditText;
+import com.google.firebase.database.ValueEventListener;
 
-public class SearchActivity extends AppCompatActivity
-{
-    private Button searchBtn;
-    private EditText inputText;
-    private RecyclerView searchList;
-    private String searchInput;
+import java.util.ArrayList;
+
+public class SearchActivity extends AppCompatActivity implements ItemClickListener{
+
+    private SearchView searchView;
+    private ArrayList<Product> productArrayList;
+    private DatabaseReference productReference;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private ItemClickListener itemClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,62 +36,82 @@ public class SearchActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        inputText = findViewById(R.id.search_product_name);
-        searchBtn = findViewById(R.id.search_btn);
-        searchList = findViewById(R.id.search_list);
-        searchList.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
+        //-----------------On Server: get Product List-----------------
+        productReference = FirebaseDatabase.getInstance().getReference().child("Product");
+        //--------------------------------------------------------------------
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchInput = inputText.getText().toString();
+        //-----------------Connect to UI----------------------------------
+        searchView = (SearchView) findViewById(R.id.search_bar);
+        recyclerView = (RecyclerView) findViewById(R.id.product_list);
+        //--------------------------------------------------------------------
 
-                onStart();
-            }
-        });
+        //-----------------Recycle View----------------------------------
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        //--------------------------------------------------------------------
     }
-
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Product");
-
-
-        FirebaseRecyclerOptions<Product> options =
-                new FirebaseRecyclerOptions.Builder<Product>()
-                        .setQuery(reference.orderByChild("name").startAt(searchInput), Product.class)
-                        .build();
-
-        FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter =
-                new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
-                        //------------------------------Retrieve Info from Database------------------------------
-                        holder.textProductName.setText(model.getName());
-                        //------------------------------------------------------------------------------------------
-
-                        //------------------------------to Product Details Activity------------------------------
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent intent = new Intent(SearchActivity.this, ProductDetailsActivity.class);
-                                intent.putExtra("productID", model.getId());
-                                startActivity(intent);
-                            }
-                        });
+        itemClickListener = this;
+        if (productReference != null) {
+            productReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        productArrayList = new ArrayList<Product>();
+                        for (DataSnapshot ds: snapshot.getChildren()) {
+                            productArrayList.add(ds.getValue(Product.class));
+                        }
+                        ProductAdapter adapter = new ProductAdapter(itemClickListener, productArrayList);
+                        recyclerView.setAdapter(adapter);
                     }
+                }
 
-                    @NonNull
-                    @Override
-                    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.products_items_layout, parent, false);
-                        ProductViewHolder holder = new ProductViewHolder(view);
-                        return holder;
-                    }
-                };
-        searchList.setAdapter(adapter);
-        adapter.startListening();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(SearchActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        if (searchView != null) {
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    search(newText, itemClickListener);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void search(String keyword, ItemClickListener itemClickListener) {
+        if (!keyword.equals("")){
+            ArrayList<Product> productSearchList = new ArrayList<>();
+            for (Product object : productArrayList){
+                if(object.getName().toLowerCase().contains(keyword.toLowerCase())){
+                    productSearchList.add(object);
+                }
+            }
+            ProductAdapter adapterClass = new ProductAdapter(itemClickListener, productSearchList);
+            recyclerView.setAdapter(adapterClass);
+        }
+        else {
+            ProductAdapter adapterClass = new ProductAdapter(itemClickListener, productArrayList);
+            recyclerView.setAdapter(adapterClass);
+        }
+    }
+
+    @Override
+    public void onClick(View view, int position, boolean isLongClick) {
+
     }
 }

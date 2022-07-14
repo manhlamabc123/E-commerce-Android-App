@@ -12,7 +12,8 @@
         android:id="@+id/product_image_details"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/phone"/>
 
     <LinearLayout
         android:id="@+id/product_name_details_line"

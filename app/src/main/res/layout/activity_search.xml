@@ -5,51 +5,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    android:background="@drawable/background">
 
     <RelativeLayout
-        android:id="@+id/r5"
+        android:id="@+id/rlll"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimaryDark"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_alignParentTop="true">
 
-        <com.rey.material.widget.EditText
-            android:id="@+id/search_product_name"
-            android:layout_width="290dp"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Product Name"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:background="@color/white"
-            android:padding="9dp"
-            android:layout_marginStart="5dp"
-            android:layout_centerVertical="true"
-            android:textColorHint="@color/colorPrimaryDark"
-            />
-
-        <Button
-            android:id="@+id/search_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:padding="9dp"
-            android:layout_centerInParent="true"
-            android:background="@color/colorPrimaryDark"
-            android:layout_toRightOf="@+id/search_product_name"
-            />
+            android:layout_marginTop="10dp"
+            android:text="Product Search"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
 
     </RelativeLayout>
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlll"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/input_design"
+        android:layoutDirection="rtl"
+        app:queryHint="Product's Name" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_list"
+        android:id="@+id/product_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/r5">
+        android:layout_below="@+id/search_bar" />
 
-    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>
