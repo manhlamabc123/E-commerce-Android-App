@@ -86,7 +86,7 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
                             //------------------------------On Server: Update User's Cart------------------------------
                             Prevalent.getCurrentCustomer().removeItemFromCart(position);
                             FirebaseDatabase.getInstance().getReference().child("Customer")
-                                    .child(Prevalent.getCurrentCustomer().getPhone())
+                                    .child(Prevalent.getCurrentCustomer().getPhoneNumber())
                                     .updateChildren(Prevalent.getCurrentCustomer().toMap())
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

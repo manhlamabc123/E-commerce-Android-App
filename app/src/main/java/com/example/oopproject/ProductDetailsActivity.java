@@ -167,14 +167,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                                 //-------------------On Server: Update Customer's Cart-------------------
                                 DatabaseReference customerReference = FirebaseDatabase.getInstance().getReference().child("Customer");
-                                Query query = customerReference.orderByChild("phone").equalTo(Prevalent.getCurrentCustomer().getPhone());
+                                Query query = customerReference.orderByChild("phone").equalTo(Prevalent.getCurrentCustomer().getPhoneNumber());
                                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.child(Prevalent.getCurrentCustomer().getPhone()).exists()) {
+                                        if (snapshot.child(Prevalent.getCurrentCustomer().getPhoneNumber()).exists()) {
                                             Map<String, Object> userdataMap = Prevalent.getCurrentCustomer().toMap();
 
-                                            FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhone()).updateChildren(userdataMap)
+                                            FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhoneNumber()).updateChildren(userdataMap)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {

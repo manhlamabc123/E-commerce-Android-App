@@ -2,31 +2,40 @@ package com.example.oopproject.classes;
 
 public abstract class Person {
 
-    private String phone;
+    private String phoneNumber;
     private String name;
-    private String Password;
+    private String password;
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Person(String phoneNumber, String name, String password) {
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.password = password;
+    }
+
+    public Person() {
     }
 }

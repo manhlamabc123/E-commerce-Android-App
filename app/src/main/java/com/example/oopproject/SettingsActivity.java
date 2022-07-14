@@ -100,7 +100,7 @@ public class SettingsActivity extends AppCompatActivity
         userMap. put("name", fullNameEditText.getText().toString());
 //        userMap. put("address", addressEditText.getText().toString());
         userMap. put("phone", userPhoneEditText.getText().toString());
-        ref.child(Prevalent.getCurrentCustomer().getPhone()).updateChildren(userMap);
+        ref.child(Prevalent.getCurrentCustomer().getPhoneNumber()).updateChildren(userMap);
 
         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
@@ -165,7 +165,7 @@ public class SettingsActivity extends AppCompatActivity
 //        if (imageUri != null)
 //        {
 //            final StorageReference fileRef = storageProfilePrictureRef
-//                    .child(Prevalent.getCurrentCustomer().getPhone() + ".jpg");
+//                    .child(Prevalent.getCurrentCustomer().getPhoneNumber() + ".jpg");
 //
 //            uploadTask = fileRef.putFile(imageUri);
 //
@@ -197,7 +197,7 @@ public class SettingsActivity extends AppCompatActivity
 //                                userMap. put("address", addressEditText.getText().toString());
 //                                userMap. put("phoneOrder", userPhoneEditText.getText().toString());
 //                                userMap. put("image", myUrl);
-//                                ref.child(Prevalent.getCurrentCustomer().getPhone()).updateChildren(userMap);
+//                                ref.child(Prevalent.getCurrentCustomer().getPhoneNumber()).updateChildren(userMap);
 //
 //                                progressDialog.dismiss();
 //
@@ -222,7 +222,7 @@ public class SettingsActivity extends AppCompatActivity
 
     private void userInfoDisplay(final CircleImageView profileImageView, final EditText fullNameEditText, final TextView userPhoneEditText, final EditText addressEditText)
     {
-        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhone());
+        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhoneNumber());
 
         UsersRef.addValueEventListener(new ValueEventListener() {
             @Override

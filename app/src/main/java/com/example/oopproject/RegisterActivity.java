@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.oopproject.classes.Address;
+import com.example.oopproject.classes.Customer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -34,12 +36,12 @@ public class RegisterActivity extends AppCompatActivity {
     private Spinner provinceSpinner, districtSpinner, communeSpinner;
     private ArrayAdapter<CharSequence> provinceAdapter, districtAdapter, communeAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //-----------------------Connect to UI----------------------------------------------
         CreateAccountButton = (Button) findViewById(R.id.register_btn);
         InputName = (EditText) findViewById(R.id.register_username_input);
         InputPassword = (EditText) findViewById(R.id.register_password_input);
@@ -49,13 +51,12 @@ public class RegisterActivity extends AppCompatActivity {
         provinceSpinner = (Spinner)findViewById(R.id.spinner_province);
         districtSpinner = (Spinner)findViewById(R.id.spinner_district);
         communeSpinner = (Spinner)findViewById(R.id.spinner_commune);
+        //--------------------------------------------------------------------------------------------
 
-        provinceAdapter = ArrayAdapter.createFromResource(this,
-                R.array.VietNam_provinces, R.layout.spinner_layout);
+        //-----------------------Province Spinner----------------------------------------------
+        provinceAdapter = ArrayAdapter.createFromResource(this, R.array.VietNam_provinces, R.layout.spinner_layout);
         provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         provinceSpinner.setAdapter(provinceAdapter);
-
         provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -2434,18 +2435,21 @@ public class RegisterActivity extends AppCompatActivity {
                 selectedProvince = "";
             }
         });
+        //
 
+        //-----------------------Create Button----------------------------------------------
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CreateAccount();
             }
         });
+        //--------------------------------------------------------------------------------------------
     }
 
     private void CreateAccount() {
         String name = InputName.getText().toString();
-        String phone = InputPhoneNumber.getText().toString();
+        String phoneNumber = InputPhoneNumber.getText().toString();
         String password = InputPassword.getText().toString();
         String detailAddress = InputDetailAddress.getText().toString();
 
@@ -2453,7 +2457,7 @@ public class RegisterActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Please write your name...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(phone))
+        else if (TextUtils.isEmpty(phoneNumber))
         {
             Toast.makeText(this, "Please write your phone...", Toast.LENGTH_SHORT).show();
         }
@@ -2485,27 +2489,21 @@ public class RegisterActivity extends AppCompatActivity {
             loadingBar.show();
         }
 
-        ValidatephoneNumber(name, phone, password, selectedProvince, selectedDistrict, selectedCommune, detailAddress);
+        ValidatePhoneNumber(name, phoneNumber, password, selectedProvince, selectedDistrict, selectedCommune, detailAddress);
     }
 
-    private void ValidatephoneNumber(String name, String phone, String password, String province, String district, String commune, String detailAddress) {
+    private void ValidatePhoneNumber(String name, String phoneNumber, String password, String province, String district, String commune, String detailAddress) {
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
 
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!(snapshot.child("Customer").child(phone).exists())) {
-                    HashMap<String, Object> userdataMap = new HashMap<>();
-                    userdataMap.put("phone", phone);
-                    userdataMap.put("password", password);
-                    userdataMap.put("name", name);
-                    userdataMap.put("province", province);
-                    userdataMap.put("district", district);
-                    userdataMap.put("commune", commune);
-                    userdataMap.put("address", detailAddress);
+                if (!(snapshot.child("Customer").child(phoneNumber).exists())) {
+                    Address address = new Address(detailAddress, province, district, commune);
+                    Customer newCustomer = new Customer(phoneNumber, name, password, address);
 
-                    RootRef.child("Customer").child(phone).updateChildren(userdataMap)
+                    RootRef.child("Customer").child(phoneNumber).updateChildren(newCustomer.toMap())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -2525,7 +2523,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }
                 else {
-                    Toast.makeText(RegisterActivity.this, "This " + phone + " already exists.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "This " + phoneNumber + " already exists.", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                     Toast.makeText(RegisterActivity.this, "Please try again using another phone number.", Toast.LENGTH_SHORT).show();
                 }
@@ -2536,6 +2534,5 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-
     }
 }

@@ -64,7 +64,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         //---------------------Info to UI---------------------
         paymentTotalPrice.setText(Prevalent.getCurrentCustomer().getTotalPriceOfCart());
         paymentName.setText(Prevalent.getCurrentCustomer().getName());
-        paymentPhoneNumber.setText(Prevalent.getCurrentCustomer().getPhone());
+        paymentPhoneNumber.setText(Prevalent.getCurrentCustomer().getPhoneNumber());
         //---------------------------------------------------------------
 
         //---------------------Confirm Button---------------------
@@ -94,7 +94,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                         Address address = new Address(paymentAddressDetail.getText().toString().trim(), "A", "B", "C");
 
                         Order order = new Order(orderID,
-                                Prevalent.getCurrentCustomer().getPhone(),
+                                Prevalent.getCurrentCustomer().getPhoneNumber(),
                                 today,
                                 address,
                                 Prevalent.getCurrentCustomer().getCart());
@@ -104,7 +104,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
                         //---------------------------On Server: Delete Cart---------------------------
                         FirebaseDatabase.getInstance().getReference().child("Customer").
-                                child(Prevalent.getCurrentCustomer().getPhone()).
+                                child(Prevalent.getCurrentCustomer().getPhoneNumber()).
                                 addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -114,7 +114,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                             Prevalent.setCurrentCustomer(customer);
 
                                             FirebaseDatabase.getInstance().getReference().child("Customer").
-                                                    child(customer.getPhone()).
+                                                    child(customer.getPhoneNumber()).
                                                     updateChildren(customer.toMap()).
                                                     addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override

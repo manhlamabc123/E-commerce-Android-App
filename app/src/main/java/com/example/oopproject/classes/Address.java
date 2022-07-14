@@ -4,16 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Address {
-    private String number;
+    private String detailAddress;
     private String province;
     private String district;
-    private String wards;
+    private String commune;
 
-    public Address(String number, String province, String district, String wards) {
-        this.number = number;
+    public Address(String detailAddress, String province, String district, String commune) {
+        this.detailAddress = detailAddress;
         this.province = province;
         this.district = district;
-        this.wards = wards;
+        this.commune = commune;
     }
 
     public String getProvince() {
@@ -24,25 +24,16 @@ public class Address {
         return district;
     }
 
-    public String getWards() {
-        return wards;
+    public String getCommune() {
+        return commune;
     }
 
-    public String getNumber() {
-        return number;
+    public String getDetailAddress() {
+        return detailAddress;
     }
 
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("number", this.getNumber());
-        result.put("province", this.getProvince());
-        result.put("district", this.getDistrict());
-        result.put("wards", this.getWards());
-        return result;
-    }
-
-    public String getAddress() {
-        return number + ", " + province + ", " + district + ", " + wards;
+    public String returnFullAddress() {
+        return this.getDetailAddress() + ", " + this.getCommune() + ", " + this.getDistrict() + ", " + this.getProvince();
     }
 
     public Address() {

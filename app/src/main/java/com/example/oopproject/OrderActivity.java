@@ -47,7 +47,7 @@ public class OrderActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Order> options =
                 new FirebaseRecyclerOptions.Builder<Order>()
-                        .setQuery(orderReference.orderByChild("customerId").equalTo(Prevalent.getCurrentCustomer().getPhone()), Order.class)
+                        .setQuery(orderReference.orderByChild("customerId").equalTo(Prevalent.getCurrentCustomer().getPhoneNumber()), Order.class)
                         .build();
 
         FirebaseRecyclerAdapter<Order, OrderViewHolder> adapter =
@@ -57,7 +57,7 @@ public class OrderActivity extends AppCompatActivity {
 
                         //------------------------------Retrieve Info from Database------------------------------
                         holder.orderDate.setText(model.getDate());
-                        holder.orderAddress.setText(model.getAddress().getAddress());
+                        holder.orderAddress.setText(model.getAddress().returnFullAddress());
                         holder.orderPrice.setText(model.getPrice());
                         //------------------------------------------------------------------------------------------
 
