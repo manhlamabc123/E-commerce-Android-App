@@ -21,10 +21,6 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         orderPrice = (TextView) itemView.findViewById(R.id.order_price);
     }
 
-    public void setItemClickListener(ItemClickListener listener){
-        this.listener = listener;
-    }
-
     @Override public void onClick(View view) {
         listener.onClick(view, getAdapterPosition(), false);
     }

@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void AllowAccessToAccount(String phone, String password) {
         if (chkBoxRememberMe.isChecked()) {
-            Paper.book().write(Prevalent.UserphoneKey, phone);
+            Paper.book().write(Prevalent.UserPhoneKey, phone);
             Paper.book().write(Prevalent.UserPasswordKey, password);
         }
 

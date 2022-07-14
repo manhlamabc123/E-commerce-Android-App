@@ -1,6 +1,5 @@
 package com.example.oopproject.classes_for_controll;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

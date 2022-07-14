@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.oopproject.classes_for_controll.Prevalent;
@@ -24,7 +23,6 @@ import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
     private Button joinNowButton, loginButton;
-    private TextView skipLoginText;
     private ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String UserPhoneKey = Paper.book().read(Prevalent.UserphoneKey);
+        String UserPhoneKey = Paper.book().read(Prevalent.UserPhoneKey);
         String UserPasswordKey = Paper.book().read(Prevalent.UserPasswordKey);
 
         if (UserPhoneKey != "" && UserPasswordKey != "") {

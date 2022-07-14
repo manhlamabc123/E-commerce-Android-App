@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -44,22 +43,22 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee);
 
-        //On Server: get Employee List
+        //-----------------On Server: get Employee List-----------------
         employeeReference = FirebaseDatabase.getInstance().getReference().child("Employee");
-        //
+        //--------------------------------------------------------------------
 
-        //Connect to UI
+        //-----------------Connect to UI----------------------------------
         searchView = (SearchView) findViewById(R.id.search_bar);
         recyclerView = (RecyclerView) findViewById(R.id.employee_list);
         jobFilter = (Spinner) findViewById(R.id.employee_job_filter);
-        //
+        //--------------------------------------------------------------------
 
-        //Recycle View
+        //-----------------Recycle View----------------------------------
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        //
+        //--------------------------------------------------------------------
 
-        //Job Filter
+        //----------------------------------Job Filter---------------------------------------------------
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(EmployeeActivity.this, R.array.employee_job_list, R.layout.employee_job_snipper_layout);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         jobFilter.setAdapter(adapter);
@@ -77,7 +76,7 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
 
             }
         });
-        //
+        //------------------------------------------------------------------------------------------------------
     }
 
     @Override

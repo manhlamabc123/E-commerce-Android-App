@@ -40,24 +40,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference productReference;
     private int productCounter = 1;
-//    private Button LogoutBtn;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-//        LogoutBtn = (Button)findViewById(R.id.nav_logout);
-//
-//        LogoutBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                Paper.book().destroy();
-//
-//                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         //-------------------------Get product's data from server-------------------------
         productReference = FirebaseDatabase.getInstance().getReference().child("Product");
@@ -256,7 +242,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 

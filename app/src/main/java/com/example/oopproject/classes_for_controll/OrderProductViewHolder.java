@@ -22,10 +22,6 @@ public class OrderProductViewHolder extends RecyclerView.ViewHolder implements V
         orderProductQuantity = (TextView) itemView.findViewById(R.id.cart_product_quantity);
     }
 
-    public void setItemClickListener(ItemClickListener listener){
-        this.listener = listener;
-    }
-
     @Override public void onClick(View view) {
         listener.onClick(view, getAdapterPosition(), false);
     }

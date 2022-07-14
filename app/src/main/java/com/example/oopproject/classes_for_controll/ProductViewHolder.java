@@ -19,10 +19,6 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         textProductName = (TextView) itemView.findViewById(R.id.product_name);
     }
 
-    public void setItemClickListener(ItemClickListener listener){
-        this.listener = listener;
-    }
-
     @Override public void onClick(View view) {
         listener.onClick(view, getAdapterPosition(), false);
     }
