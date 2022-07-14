@@ -84,7 +84,6 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
         super.onStart();
 
         itemClickListener = this;
-        String job = jobFilter.getSelectedItem().toString();
         if (employeeReference != null) {
             employeeReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -115,6 +114,7 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
+                    String job = jobFilter.getSelectedItem().toString();
                     search(newText, job, itemClickListener);
                     return true;
                 }
