@@ -123,8 +123,8 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
     }
 
     private void search(String keyword, String job, ItemClickListener itemClickListener) {
+        ArrayList<Employee> employeeSearchList = new ArrayList<>();
         if (!keyword.equals("")){
-            ArrayList<Employee> employeeSearchList = new ArrayList<>();
             for (Employee object : employeeArrayList){
                 if(object.getName().toLowerCase().contains(keyword.toLowerCase()) && object.getJob().equals(job)){
                     employeeSearchList.add(object);
@@ -134,7 +134,6 @@ public class EmployeeActivity extends AppCompatActivity implements ItemClickList
             recyclerView.setAdapter(adapterClass);
         }
         else {
-            ArrayList<Employee> employeeSearchList = new ArrayList<>();
             for (Employee object : employeeArrayList){
                 if(object.getJob().equals(job)){
                     employeeSearchList.add(object);

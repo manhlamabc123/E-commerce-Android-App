@@ -191,7 +191,7 @@ public class ResetPasswordActivity extends AppCompatActivity
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
+                    Toast.makeText(ResetPasswordActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

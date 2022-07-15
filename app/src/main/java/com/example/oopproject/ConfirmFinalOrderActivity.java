@@ -18,6 +18,7 @@ import com.example.oopproject.classes.Address;
 import com.example.oopproject.classes.Customer;
 import com.example.oopproject.classes.Order;
 import com.example.oopproject.classes_for_controll.SelectAddress;
+import com.example.oopproject.interfaces.FirebaseCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -79,6 +80,11 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //---------------------------Create Order---------------------------
                 getChildCount(new FirebaseCallback() {
+                    @Override
+                    public void onCallback() {
+
+                    }
+
                     @Override
                     public void onCallback(int childCount) {
                         String orderID = "";
@@ -170,10 +176,4 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    //-----------------------Interface for "Using many Firebase event listener at the same time"------------------------------
-    private interface FirebaseCallback {
-        void onCallback(int childCount);
-    }
-    //------------------------------------------------------------------------------------------------------------------------
 }

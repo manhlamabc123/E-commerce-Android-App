@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.oopproject.classes_for_controll.Prevalent;
 import com.example.oopproject.classes.Product;
 import com.example.oopproject.classes_for_controll.CartAdapter;
+import com.example.oopproject.interfaces.FirebaseCallback;
 import com.example.oopproject.interfaces.ItemClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -101,6 +102,11 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
                                     });
                             //------------------------------------------------------------------------------------------
                         }
+
+                        @Override
+                        public void onCallback(int number) {
+
+                        }
                     });
                 }
                 //------------------------------------------------------------------------------------------
@@ -142,15 +148,9 @@ public class CartActivity extends AppCompatActivity implements ItemClickListener
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Toast.makeText(CartActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
         //------------------------------------------------------------------------------------------------------------------------
     }
-
-    //-----------------------Interface for "Using many Firebase event listener at the same time"------------------------------
-    private interface FirebaseCallback {
-        void onCallback();
-    }
-    //------------------------------------------------------------------------------------------------------------------------
 }
