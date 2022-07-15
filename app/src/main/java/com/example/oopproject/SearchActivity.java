@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class SearchActivity extends AppCompatActivity implements ItemClickListen
 
     private SearchView searchView;
     private ArrayList<Product> productArrayList;
+    private ArrayList<Product> productSearchList;
     private DatabaseReference productReference;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -105,7 +107,7 @@ public class SearchActivity extends AppCompatActivity implements ItemClickListen
 
     private void search(String keyword, ItemClickListener itemClickListener) {
         if (!keyword.equals("")){
-            ArrayList<Product> productSearchList = new ArrayList<>();
+            productSearchList = new ArrayList<>();
             for (Product object : productArrayList){
                 if(object.getName().toLowerCase().contains(keyword.toLowerCase())){
                     productSearchList.add(object);
@@ -122,6 +124,11 @@ public class SearchActivity extends AppCompatActivity implements ItemClickListen
 
     @Override
     public void onClick(View view, int position, boolean isLongClick) {
-
+        Intent intent = new Intent(SearchActivity.this, ProductDetailsActivity.class);
+        if (!searchView.getQuery().toString().equals("")) intent.putExtra("productID", productSearchList.get(position).getId());
+        else intent.putExtra("productID", productArrayList.get(position).getId());
+        searchView.setQuery("", false);
+        searchView.clearFocus();
+        startActivity(intent);
     }
 }
