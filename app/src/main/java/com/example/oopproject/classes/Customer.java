@@ -1,11 +1,13 @@
 package com.example.oopproject.classes;
 
+import com.example.oopproject.interfaces.ToMap;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Customer extends Person{
+public class Customer extends Person implements ToMap {
 
     private Address address;
     private ArrayList<Product> cart = new ArrayList<Product>();

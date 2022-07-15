@@ -1,11 +1,13 @@
 package com.example.oopproject.classes;
 
+import com.example.oopproject.interfaces.ToMap;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Product {
+public class Product implements ToMap {
     private String id;
     private String name;
     private String category;

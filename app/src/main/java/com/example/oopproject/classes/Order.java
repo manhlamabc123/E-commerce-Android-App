@@ -1,5 +1,7 @@
 package com.example.oopproject.classes;
 
+import com.example.oopproject.interfaces.ToMap;
+
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Order {
+public class Order implements ToMap {
     private String id;
     private String customerId;
     private Date buyDate;
