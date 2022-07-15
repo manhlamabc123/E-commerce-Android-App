@@ -6,6 +6,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -30,6 +31,8 @@ public class SearchActivity extends AppCompatActivity implements ItemClickListen
     private RecyclerView.LayoutManager layoutManager;
     private ItemClickListener itemClickListener;
 
+    private ProgressDialog loadingBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,6 +46,7 @@ public class SearchActivity extends AppCompatActivity implements ItemClickListen
         //-----------------Connect to UI----------------------------------
         searchView = (SearchView) findViewById(R.id.search_bar);
         recyclerView = (RecyclerView) findViewById(R.id.product_list);
+        loadingBar = new ProgressDialog(this);
         //--------------------------------------------------------------------
 
         //-----------------Recycle View----------------------------------
@@ -54,6 +58,11 @@ public class SearchActivity extends AppCompatActivity implements ItemClickListen
     @Override
     protected void onStart() {
         super.onStart();
+
+        loadingBar.setTitle("Search for Product");
+        loadingBar.setMessage("Searching...");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
 
         itemClickListener = this;
         if (productReference != null) {
@@ -67,6 +76,7 @@ public class SearchActivity extends AppCompatActivity implements ItemClickListen
                         }
                         ProductAdapter adapter = new ProductAdapter(itemClickListener, productArrayList);
                         recyclerView.setAdapter(adapter);
+                        loadingBar.dismiss();
                     }
                 }
 
