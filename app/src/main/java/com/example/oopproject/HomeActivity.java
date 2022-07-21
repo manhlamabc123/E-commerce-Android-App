@@ -2,6 +2,7 @@ package com.example.oopproject;
 
 import static android.view.View.*;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,11 +41,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference productReference;
     private int productCounter = 1;
+    private ProgressDialog loadingBar;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        loadingBar = new ProgressDialog(this);
         //-------------------------Get product's data from server-------------------------
         productReference = FirebaseDatabase.getInstance().getReference().child("Product");
         //-----------------------------------------------------------------
@@ -58,6 +61,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fabForward.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                //-------------------Loading Bar-------------------
+                loadingBar.setTitle("Please wait");
+                loadingBar.setMessage("Loading...");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
+                //------------------------------------------------------------------------------------------
+
                 if (productCounter < 100) {
                     productCounter += 10;
                     String productIdString = "P0" + productCounter;
@@ -96,6 +106,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             };
                     recyclerView.setAdapter(adapter);
+                    loadingBar.dismiss();
                     adapter.startListening();
                 } else {
                     Log.d("WARNING", "Too many");
@@ -110,6 +121,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 if (productCounter > 10) {
+                    //-------------------Loading Bar-------------------
+                    loadingBar.setTitle("Please wait");
+                    loadingBar.setMessage("Loading...");
+                    loadingBar.setCanceledOnTouchOutside(false);
+                    loadingBar.show();
+                    //------------------------------------------------------------------------------------------
+
                     productCounter -= 10;
                     String productIdString = "P0" + productCounter;
                     if (productCounter <= 9 && productCounter >=1 ) productIdString = "P00" + productCounter;
@@ -148,6 +166,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             };
                     recyclerView.setAdapter(adapter);
+                    loadingBar.dismiss();
                     adapter.startListening();
                 } else {
                     Log.d("WARNING", "Too many");
@@ -187,6 +206,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override protected void onStart() {
         super.onStart();
 
+        //-------------------Loading Bar-------------------
+        loadingBar.setTitle("Please wait");
+        loadingBar.setMessage("Loading...");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+        //------------------------------------------------------------------------------------------
+
         String productIdString = "P0" + productCounter;
         if (productCounter <= 9 && productCounter >=1 ) productIdString = "P00" + productCounter;
         FirebaseRecyclerOptions<Product> options =
@@ -224,6 +250,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     }
                 };
         recyclerView.setAdapter(adapter);
+        loadingBar.dismiss();
         adapter.startListening();
     }
 

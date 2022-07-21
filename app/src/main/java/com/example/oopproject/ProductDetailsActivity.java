@@ -114,6 +114,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (counter == 0) {
+                    Toast.makeText(ProductDetailsActivity.this, "Please buy something!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 //-------------------Loading Bar-------------------
                 loadingBar.setTitle("Please wait");
                 loadingBar.setMessage("Adding to cart...");
