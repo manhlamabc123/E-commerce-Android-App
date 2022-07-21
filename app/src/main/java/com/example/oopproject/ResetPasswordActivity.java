@@ -64,7 +64,7 @@ public class ResetPasswordActivity extends AppCompatActivity
             titleQuestions.setText("Set questions");
             titleQuestions.setText("Please set Answer for the Following Security Questions");
             verifyButton.setText("Set");
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.currentCustomer.getPhoneNumber());
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Customer").child(Prevalent.getCurrentCustomer().getPhoneNumber());
 
             ref.child("Security Questions").addValueEventListener(new ValueEventListener() {
                 @Override
