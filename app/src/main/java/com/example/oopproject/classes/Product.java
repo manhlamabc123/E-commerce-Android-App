@@ -17,7 +17,7 @@ public class Product implements ToMap {
     private double screen;
     private String description;
     private double warranty;
-    private ArrayList<Details> details;
+    private ArrayList<Details> details = new ArrayList<Details>();
 
     public String getName() {
         return name;
@@ -59,7 +59,7 @@ public class Product implements ToMap {
         return id;
     }
 
-    public Product(String id, String name, String category, String manufacturer, String include, String os, double screen, String description, double warranty, ArrayList<Details> details) {
+    public Product(String id, String name, String category, String manufacturer, String include, String os, double screen, String description, double warranty) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -69,7 +69,6 @@ public class Product implements ToMap {
         this.screen = screen;
         this.description = description;
         this.warranty = warranty;
-        this.details = details;
     }
 
     public Product() {

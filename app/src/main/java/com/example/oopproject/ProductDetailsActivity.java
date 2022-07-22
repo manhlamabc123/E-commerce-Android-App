@@ -137,15 +137,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
                                 //-------------------Create Cart and Add the current Product to it-------------------
-                                Product product = new Product();
-                                Details details = new Details(Double.parseDouble(productRAM.getText().toString()),
-                                        Double.parseDouble(productMemory.getText().toString()),
-                                        product.convertToDouble(productPrice.getText().toString()),
-                                        productColor.getSelectedItem().toString(),
-                                        Double.parseDouble(textCounter.getText().toString()));
-                                ArrayList<Details> detailsArrayList = new ArrayList<>();
-                                detailsArrayList.add(details);
-                                product = new Product(productID,
+                                Product product = new Product(productID,
                                         productName.getText().toString(),
                                         productCategory.getText().toString(),
                                         productManufacturer.getText().toString(),
@@ -153,8 +145,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                         productOS.getText().toString(),
                                         Double.parseDouble(productScreen.getText().toString()),
                                         productDescription.getText().toString(),
-                                        Double.parseDouble(productWarranty.getText().toString()),
-                                        detailsArrayList);
+                                        Double.parseDouble(productWarranty.getText().toString()));
+                                Details details = new Details(Double.parseDouble(productRAM.getText().toString()),
+                                        Double.parseDouble(productMemory.getText().toString()),
+                                        product.convertToDouble(productPrice.getText().toString()),
+                                        productColor.getSelectedItem().toString(),
+                                        Double.parseDouble(textCounter.getText().toString()));
+                                product.getDetails().add(details);
                                 Prevalent.getCurrentCustomer().addProductToCart(product);
                                 //------------------------------------------------------------------------------------------
 
