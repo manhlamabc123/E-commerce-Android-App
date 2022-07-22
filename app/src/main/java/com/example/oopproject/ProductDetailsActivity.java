@@ -125,28 +125,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 loadingBar.show();
                 //------------------------------------------------------------------------------------------
 
-                //-------------------Create Cart and Add the current Product to it-------------------
-                Product product = new Product();
-                Details details = new Details(Double.parseDouble(productRAM.getText().toString()),
-                        Double.parseDouble(productMemory.getText().toString()),
-                        product.convertToDouble(productPrice.getText().toString()),
-                        productColor.getSelectedItem().toString(),
-                        Double.parseDouble(textCounter.getText().toString()));
-                ArrayList<Details> detailsArrayList = new ArrayList<>();
-                detailsArrayList.add(details);
-                product = new Product(productID,
-                        productName.getText().toString(),
-                        productCategory.getText().toString(),
-                        productManufacturer.getText().toString(),
-                        productInclude.getText().toString(),
-                        productOS.getText().toString(),
-                        Double.parseDouble(productScreen.getText().toString()),
-                        productDescription.getText().toString(),
-                        Double.parseDouble(productWarranty.getText().toString()),
-                        detailsArrayList);
-                Prevalent.getCurrentCustomer().addProductToCart(product);
-                //------------------------------------------------------------------------------------------
-
                 //-------------------Update Product's Quantity-------------------
                 double check = Double.parseDouble(productQuantity.getText().toString()) - (double) counter;
                 if (check < 0) {
@@ -158,6 +136,28 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
+                                //-------------------Create Cart and Add the current Product to it-------------------
+                                Product product = new Product();
+                                Details details = new Details(Double.parseDouble(productRAM.getText().toString()),
+                                        Double.parseDouble(productMemory.getText().toString()),
+                                        product.convertToDouble(productPrice.getText().toString()),
+                                        productColor.getSelectedItem().toString(),
+                                        Double.parseDouble(textCounter.getText().toString()));
+                                ArrayList<Details> detailsArrayList = new ArrayList<>();
+                                detailsArrayList.add(details);
+                                product = new Product(productID,
+                                        productName.getText().toString(),
+                                        productCategory.getText().toString(),
+                                        productManufacturer.getText().toString(),
+                                        productInclude.getText().toString(),
+                                        productOS.getText().toString(),
+                                        Double.parseDouble(productScreen.getText().toString()),
+                                        productDescription.getText().toString(),
+                                        Double.parseDouble(productWarranty.getText().toString()),
+                                        detailsArrayList);
+                                Prevalent.getCurrentCustomer().addProductToCart(product);
+                                //------------------------------------------------------------------------------------------
+
                                 //-------------------Local: update Product-------------------
                                 Product product1 = snapshot.getValue(Product.class);
                                 product1.setQuantity(productColor.getSelectedItem().toString(), check);
