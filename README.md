@@ -36,7 +36,7 @@ This Android App allows Users to buy Product like Smartphone, Tablet, Laptop,...
 
 ## Made by
 
-* Trần Đức Mạnh (me): System Design, Front-end/Back-end Developer
+* Trần Đức Mạnh (me): Team Leader, System Design, Front-end/Back-end Developer
 * Hoàng Quốc Bảo (https://github.com/revgato): System Design, Back-end Developer
 * Vũ Minh Hải (https://github.com/mhai247): System Design, Database Design
 
